@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './styles/style_main.scss'
 import './styles/general.scss'
+import 'https://kit.fontawesome.com/3034a52bcb.js'
 
 function App() {
   const [profilValue, setProfilValue] = useState({ display: 'none' });
@@ -67,10 +68,10 @@ function App() {
     {/* Content Startseite */}
     <div className="content-1">
       <h1>Willkomen bei Quizzify</h1>
-      <div className="enter-muber">
-        <input placeholder="Spiel Nummer"></input>
+      <div className="enter-number">
+        <input placeholder="Spiel-ID" type='text' className='game-id'></input>
         <button className="start">Starten</button>
-        <div className="faq-content-1">Wie bekomme ich eine Nummer? </div>
+        <div className="faq-content-1"><i class="fa-solid fa-circle-info"></i>Wie bekomme ich eine ID? </div>
         <div className="new-quiz">Erstelle dein eigenes Quiz!</div>
       </div>
     </div>

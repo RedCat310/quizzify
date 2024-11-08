@@ -2,6 +2,7 @@ import { useState } from "react";
 import '../styles/style_start.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
+import user from '../assets/user.svg'
 
 import { Link, useNavigate } from "react-router-dom";
 // import { useLoaderData } from "react-router-dom";
@@ -100,6 +101,7 @@ function StartPage() {
         </div>
 
         <img src={logo} alt="" className="logo"></img>
+        <img src={user} alt="" className="user"></img>
   
       {/* Content Startseite */}
       <div className="content-1">

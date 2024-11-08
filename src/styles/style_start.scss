@@ -92,11 +92,21 @@
     cursor: pointer;
   }
 
+  .user{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    height: 35px;
+    background-color: var(--secondary-color-min);
+    padding: 10px 10px;
+    border-radius: 1000px;
+    cursor: pointer;
+  }
 
   .content-1{
     position: absolute;
     left: 50%;
-    top: 10%;
+    top: 9%;
     transform: translate(-50%, -50%);
   }
         // Main
@@ -289,3 +299,15 @@
                     100% { transform: rotate(360deg); }
                   }
       
+@media screen and (max-width: 880px ){
+  .content-1 h1{
+    white-space: unset;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 646px ){
+  .content-1 h1{
+    display: none;
+  }
+}

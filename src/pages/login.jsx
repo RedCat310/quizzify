@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import '../styles/login.scss'
 
 function Login() {
     const [login, setLogin] = useState("container")

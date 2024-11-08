@@ -1,6 +1,6 @@
 import { useState } from "react";
 import '../styles/style_start.scss'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { useLoaderData } from "react-router-dom";
 
 function StartPage() {
@@ -23,7 +23,7 @@ function StartPage() {
           error: { display: 'none' }
         })
         await delay(3000)
-        navigate('/game/' + gameID)
+        navigate('/' + gameID)
       }else{
         setAlert({
           style: {  }, 
@@ -102,8 +102,8 @@ function StartPage() {
         <div className="enter-number">
           <input placeholder="Spiel-ID" type='text' onChange={(e) => setGameID(e.target.value)} className='game-id'></input>
           <button className="start" onClick={enterGame}>Starten</button>
-          <div className="faq-content-1"><i class="fa-solid fa-circle-info"></i>Wie bekomme ich eine ID? </div>
-          <div className="new-quiz">Erstelle dein eigenes Quiz!</div>
+          <div className="faq-content-1"><i className="fa-solid fa-circle-info"></i>Wie bekomme ich eine ID? </div>
+          <Link className="new-quiz" to='/account'>Erstelle dein eigenes Quiz!</Link>
         </div>
       </div>
 

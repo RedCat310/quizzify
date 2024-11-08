@@ -1,52 +1,41 @@
 import { useState } from 'react';
+import { auth, google } from '../config/firebase';
+import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-    const [login, setLogin] = useState("container")
-
+    const navigate = useNavigate()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [newPassword, setNewPassword] = useState("")
+    const [newPasswordRetype, setNewPasswordRetype] = useState("")
+    const [newEmail, setNewEmail] = useState("")
+    const [name, setName] = useState("")
+    const signInWithGoogle = async () => {
+        try {
+            await signInWithPopup(auth, google)
+            navigate(-1)
+        } catch (error) {
+            console.log(error.code)
+        }
+    }
+    const register = async () => {
+    }
     return ( <div>      
-        <div className={login} id="container">
-            <div className="form-container sign-up-container">
-                <form action="#">
-                    <h1>Create Account</h1>
-                    <div className="social-container">
-                        <button className='social'><i class="fa-brands fa-google"></i></button>
-                    </div>
-                    <span>or use your email for registration</span>
-                    <input type="text" placeholder="Name" />
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <button>Sign Up</button>
-                </form>
-            </div>
-            <div className="form-container sign-in-container">
-                <form action="#">
-                    <h1>Sign in</h1>
-                    <div className="social-container">
-                        <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                    </div>
-                    <span>or use your account</span>
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <a href="#">Forgot your password?</a>
-                    <button>Sign In</button>
-                </form>
-            </div>
-            <div className="overlay-container">
-                <div className="overlay">
-                    <div className="overlay-panel overlay-left">
-                        <h1>Welcome Back!</h1>
-                        <p>To keep connected with us please login with your personal info</p>
-                        <button className="ghost" onClick={() => setLogin("container")}>Sign In</button>
-                    </div>
-                    <div className="overlay-panel overlay-right">
-                        <h1>Hello, Friend!</h1>
-                        <p>Enter your personal details and start journey with us</p>
-                        <button  className="ghost" onClick={() => setLogin("container right-panel-active")}>Sign Up</button>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
+            <button>Anmelden</button><br />
+            <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
         </div>
-
+        <div>
+            <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder='E-Mail' />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
+            <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='Passwort'/>
+            <input type="password" value={newPasswordRetype} onChange={(e) => setNewPasswordRetype(e.target.value)} placeholder='Passwort wiederholen'/>
+            <button onClick={() => register()}>Registrieren</button><br />
+            <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
+        </div>
     </div> );
 }
 

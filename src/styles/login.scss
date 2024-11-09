@@ -14,15 +14,15 @@
     height: 100px;
     cursor: pointer;
   }
-
   .zurueck{
     position: absolute;
+    bottom: 40px;
+    left: 40px;
     background-color: var(--accent-color-blue);
     color: black;
     padding: 10px 20px;
     cursor: pointer;
-    bottom: 40px;
-    left: 40px;
+    
     border-radius: 30px;
   }
             .zurueck:hover{

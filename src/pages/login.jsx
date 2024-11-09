@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { auth, google } from '../config/firebase';
 import { signInWithPopup } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
@@ -16,6 +16,14 @@ function Login() {
     const [newPasswordRetype, setNewPasswordRetype] = useState("")
     const [newEmail, setNewEmail] = useState("")
     const [name, setName] = useState("")
+    const [alert, setAlert] = useState({
+        style: { display: 'none' },
+        message: "",
+        warning: { display: 'none' },
+        info: { display: 'none' },
+        loading: { display: 'none' },
+    })
+
     const signInWithGoogle = async () => {
         try {
             await signInWithPopup(auth, google)
@@ -24,11 +32,55 @@ function Login() {
             console.log(error.code)
         }
     }
+    const makeAlert = async (error, loading, message, duration) => {
+        if(duration === "none"){
+            setAlert({
+                style: { display: 'none' },
+                message: "",
+                warning: { display: 'none' },
+                info: { display: 'none' },
+                loading: { display: 'none' },
+            })
+        }
+        setAlert({
+            style: { },
+            message: message,
+            warning: error ? {  } : { display: 'none' },
+            info: error ? { display: 'none' } : {  },
+            loading: loading ? {  } : { display: 'none' },
+        })
+        if(duration !== "all"){
+            await delay(duration * 1000)
+            setAlert({
+                style: { display: 'none' },
+                message: "",
+                warning: { display: 'none' },
+                info: { display: 'none' },
+                loading: { display: 'none' },
+            })
+        }
+    }
+    const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
     const register = async () => {
+        if(newEmail !== "" && newPassword !== "" && newPasswordRetype !== "" && name !== ""){
+            if(newPassword === newPasswordRetype){
+
+            }else{
+                makeAlert(true, false, "Passwörter stimmen nicht überein", 2)
+            }
+        }else{
+            makeAlert(true, false, "Bitte alle Felder ausfüllen!", 2);
+        }
     }
     return ( 
     <div> 
-
+        <div className='alert' style={alert.style}>
+          <div className='search'>
+            <div className='search-text' style={alert.info}>{ alert.message }</div> {/* Wenn gesucht */}
+            <div className='error-search'style={alert.warning}>{ alert.message }</div> {/* Wenn nix gefunden */}
+            <div className="loader" style={alert.loading}></div> {/* Wenn gesucht */}
+          </div>
+      </div>
             <img src={logo} alt="" className="logo"></img>
 
         <div className='field'>     
@@ -51,10 +103,9 @@ function Login() {
                     <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
                 </div>
             </div>
+            <Link to="/" className='zurueck'>Zurück</Link>
         </div> 
-
-        <div className='zurueck'>Zurück</div>
-    </div> 
+    </div>
     );
 }
 

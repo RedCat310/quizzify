@@ -7,32 +7,45 @@ import Account from './pages/account';
 import Login from './pages/login';
 import Create from './pages/create';
 import Host from './pages/host';
+import TransitionComponent from './components/transition';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <StartPage/>,
+        element: <TransitionComponent>
+            <StartPage></StartPage>
+        </TransitionComponent>,
         // loader: startPageLoader,
     },
     {
         path: "/account/create",
-        element: <Create/>,
+        element: <TransitionComponent>
+            <Create/>
+        </TransitionComponent>,
     },
     {
         path: "/account/login",
-        element: <Login/>,
+        element: <TransitionComponent>
+            <Login/>
+        </TransitionComponent>,
     },
     {
         path: "/account",
-        element: <Account/>,
+        element: <TransitionComponent>
+            <Account/>
+        </TransitionComponent>,
     },
     {
         path: "/account/host",
-        element: <Host/>,
+        element: <TransitionComponent>
+            <Host/>
+        </TransitionComponent>,
     },
     {
         path: "/:id",
-        element: <Game/>,
+        element: <TransitionComponent>
+            <Game/>
+        </TransitionComponent>,
     },
 ])
 

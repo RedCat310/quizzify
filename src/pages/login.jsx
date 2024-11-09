@@ -74,7 +74,7 @@ function Login() {
     const register = async () => {
         if(newEmail !== "" && newPassword !== "" && newPasswordRetype !== "" && name !== ""){
             if(newPassword === newPasswordRetype){
-                // makeAlert(false, true, "Konto erstellen", "all")
+                makeAlert(false, true, "Konto erstellen", "all")
                 try {
                     let data = await createUserWithEmailAndPassword(auth, newEmail, newPassword)
                     await sendEmailVerification(data.user)
@@ -87,7 +87,8 @@ function Login() {
                 } catch (error) {
                     alert(error.code)
                 }
-                makeAlert(true, false, "Bitte Überprüfen sie ihr Email-Postfach, um ihre Email zu Verifizieren.")
+                await makeAlert("none")
+                makeAlert(false, false, <div className='alert-text'>Konto erstellt!<br></br>Bitte Überprüfen sie ihr Email-Postfach,<br></br> um ihre Email zu Verifizieren.<br></br>Die E-Mail ist höchstwarscheinlich<br></br> im Spam-Ordner gelandet!</div>, 6)
             }else{
                 makeAlert(true, false, "Passwörter stimmen nicht überein", 2)
             }

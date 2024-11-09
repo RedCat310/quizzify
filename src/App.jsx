@@ -8,6 +8,7 @@ import Login from './pages/login';
 import Create from './pages/create';
 import Host from './pages/host';
 import TransitionComponent from './components/transition';
+import AppBar from './components/AppBar';
 
 const router = createBrowserRouter([
     {
@@ -19,9 +20,12 @@ const router = createBrowserRouter([
     },
     {
         path: "/account/create",
-        element: <TransitionComponent>
-            <Create/>
-        </TransitionComponent>,
+        element: <div>
+            <AppBar></AppBar>
+            <TransitionComponent>
+                <Create/>
+            </TransitionComponent>
+        </div>,
     },
     {
         path: "/account/login",
@@ -31,15 +35,21 @@ const router = createBrowserRouter([
     },
     {
         path: "/account",
-        element: <TransitionComponent>
-            <Account/>
-        </TransitionComponent>,
+        element: <div>
+            <AppBar></AppBar>
+            <TransitionComponent>
+                <Account/>
+            </TransitionComponent>
+        </div>,
     },
     {
         path: "/account/host",
-        element: <TransitionComponent>
-            <Host/>
-        </TransitionComponent>,
+        element: <div>
+            <AppBar></AppBar>
+            <TransitionComponent>
+                <Host/>
+            </TransitionComponent>
+        </div>,
     },
     {
         path: "/:id",

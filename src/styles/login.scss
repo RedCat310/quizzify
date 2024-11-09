@@ -266,11 +266,17 @@
     left: 50%;
     top: 400px;
     transform: translate(-50%, -50%);
-    height: 10em;
+    height: 20em;
     width: 30em;
     border-radius: 50px;
     z-index: 100;
     display: block;
     white-space: nowrap;
     border: 2px solid var(--primary-color);
-    }
+}
+.alert-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

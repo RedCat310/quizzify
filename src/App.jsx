@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     {
         path: "/account/create",
         element: <div>
-            <AppBar></AppBar>
+            <AppBar create="tag-active" account="" host=""></AppBar>
             <TransitionComponent>
                 <Create/>
             </TransitionComponent>
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     {
         path: "/account",
         element: <div>
-            <AppBar></AppBar>
+            <AppBar create="" account="tag-active" host=""></AppBar>
             <TransitionComponent>
                 <Account/>
             </TransitionComponent>
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     {
         path: "/account/host",
         element: <div>
-            <AppBar></AppBar>
+            <AppBar create="" account="" host="tag-active"></AppBar>
             <TransitionComponent>
                 <Host/>
             </TransitionComponent>

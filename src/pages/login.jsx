@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth, google } from '../config/firebase';
-import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.scss'
 import '../styles/general.scss'
@@ -74,15 +74,20 @@ function Login() {
     const register = async () => {
         if(newEmail !== "" && newPassword !== "" && newPasswordRetype !== "" && name !== ""){
             if(newPassword === newPasswordRetype){
-                makeAlert(false, true, "Konto erstellen", "all")
+                // makeAlert(false, true, "Konto erstellen", "all")
                 try {
                     let data = await createUserWithEmailAndPassword(auth, newEmail, newPassword)
-                    // sendEmailVerification(data.user)
-                    // signOut(auth)
+                    await sendEmailVerification(data.user)
+                    await updateProfile(data.user, {displayName: name})
+                    signOut(auth)
+                    setNewEmail("")
+                    setNewPassword("")
+                    setNewPasswordRetype("")
+                    setName("")
                 } catch (error) {
                     alert(error.code)
                 }
-                makeAlert(true, false, "Es wurde eine E-Mail an ihre Adresse versendet um zu verifizieren, dass sie es wirklich sind.")
+                // makeAlert(true, false, "Es wurde eine E-Mail an ihre Adresse versendet um zu verifizieren, dass sie es wirklich sind.")
             }else{
                 makeAlert(true, false, "Passwörter stimmen nicht überein", 2)
             }
@@ -102,7 +107,6 @@ function Login() {
           content: {display: "none", transition: "500ms ease-in"}
         })
     }
-
     const changeWindow2 = () =>{
         setRegisterStyle({ 
           all: { width: "200px", transition: "500ms ease-in" },
@@ -127,11 +131,11 @@ function Login() {
 
         <div className='field'>     
             <div className='login' style={loginStyle.all}>
-                <div className='login-text' style={loginStyle.text}>Hallo, Freund!</div>
+                <div className='login-text' style={loginStyle.text}>Willkommen bei Quizzify!</div>
                 <div className='login-content' style={loginStyle.content}>
                     <div className='login-header' style={loginStyle.header}>Einloggen</div>
                     <button onClick={() => signInWithGoogle()} className='sign-Google-login'><i className="fa-brands fa-google"></i></button>
-                    <div className='login-text-method'>oder nutze dein Account</div>
+                    <div className='login-text-method'>oder mit E-Mail anmelden</div>
                     <div className='login-inputs'>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>

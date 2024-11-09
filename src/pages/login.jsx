@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
+import { style } from 'framer-motion/client';
 // import '../components/login.js'
 
 
@@ -23,6 +24,9 @@ function Login() {
         info: { display: 'none' },
         loading: { display: 'none' },
     })
+    const [registerStyle, setRegisterStyle] = useState("")
+    const [loginStyle, setloginStyle] = useState("")
+
 
     const signInWithGoogle = async () => {
         try {
@@ -80,6 +84,11 @@ function Login() {
             makeAlert(true, false, "Bitte alle Felder ausfüllen!", 2);
         }
     }
+    const changeWindow = () =>{
+        setRegisterStyle({
+            style: { width: "600px" }
+        })
+    }
     return ( 
     <div> 
         <div className='alert' style={alert.style}>
@@ -92,16 +101,16 @@ function Login() {
             <img src={logo} alt="" className="logo"></img>
 
         <div className='field'>     
-            <div className='login'>
-                <div className='login-content' id='login-content'>
+            <div className='login' style={loginStyle.style}>
+                <div className='login-content'>
                 <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
                     <button>Anmelden</button><br />
-                    <button id='switchToRegister'>Registrieren</button>
+                    <button onClick={changeWindow}>Registrieren</button>
                 </div>
             </div>
-            <div className='register'>
+            <div className='register' style={registerStyle.style}>
                 <div className='register-content'>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
                     <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder='E-Mail' />

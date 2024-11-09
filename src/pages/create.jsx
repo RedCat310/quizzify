@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
 
 function Create() {
     const navigate = useNavigate()
     useEffect(() => {
-        if(!false){
+        if(!auth?.currentUser){
             navigate('/account/login')
         }
     })

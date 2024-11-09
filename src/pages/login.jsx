@@ -94,7 +94,7 @@ function Login() {
         setRegisterStyle({
             all: { width: "500px", transition: "500ms ease-in", background: "white" },
             text: {display: "none", transition: "500ms ease-in"},
-            zurueck: {right: "30px", left: "unset", transition: "500ms ease-in", background: "#4285f4"},
+            zurueck: {right: "30px", left: "unset", transition: "500ms ease-in-out", background: "#4285f4"},
             change: {display: "none"}
         })
         setloginStyle({

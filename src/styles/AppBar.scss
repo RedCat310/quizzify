@@ -9,7 +9,7 @@
 }
 
 .tags{
-    margin-left: 250px;
+    left: 40%;
     position: absolute;
     top: 40px;
     font-size: 30px;
@@ -38,6 +38,11 @@
     padding-bottom: 7px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.tag{
+    text-decoration: none;
+    color: white;
 }
 
 .tag:hover{

@@ -9,9 +9,9 @@ function AppBar(props) {
         <div className="appBar">
         <img className="logo" src={logo} alt=""></img>
             <div className="tags">
-                <Link to="/account" className={"tag-1 tag " + props.account}><i class="fa-solid fa-house"></i></Link>
-                <Link to="/account/create" className={"tag-2 tag " + props.create}><i class="fa-solid fa-pen"></i></Link>
-                <Link to="/account/host" className={"tag-3 tag " + props.host}><i class="fa-solid fa-cloud-arrow-up"></i></Link>
+                <Link to="/account" className={"tag-1 tag " + props.account}><i className="fa-solid fa-house"></i></Link>
+                <Link to="/account/create" className={"tag-2 tag " + props.create}><i className="fa-solid fa-pen"></i></Link>
+                <Link to="/account/host" className={"tag-3 tag " + props.host}><i className="fa-solid fa-cloud-arrow-up"></i></Link>
             </div>
             <img src={user} alt="" className="user"></img>
         </div>

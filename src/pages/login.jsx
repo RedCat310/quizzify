@@ -106,7 +106,7 @@ function Login() {
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
                     <button>Anmelden</button><br />
-                    <button onClick={changeWindow}>Registrieren</button>
+                    <button onClick={()=> changeWindow()}>Registrieren</button>
                 </div>
             </div>
             <div className='register' style={registerStyle}>

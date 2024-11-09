@@ -18,15 +18,16 @@
     position: absolute;
     bottom: 40px;
     left: 40px;
-    background-color: var(--accent-color-blue);
+    background-color: #d96570;
     color: black;
     padding: 10px 20px;
     cursor: pointer;
+    text-decoration: none;
     
     border-radius: 30px;
   }
             .zurueck:hover{
-                background-color: var(--accent-color-blue-hover);
+                background-color: #f37c88;
             }
 
 

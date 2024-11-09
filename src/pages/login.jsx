@@ -27,7 +27,7 @@ function Login() {
     const signInWithGoogle = async () => {
         try {
             await signInWithPopup(auth, google)
-            navigate(-1)
+            navigate('/account')
         } catch (error) {
             console.log(error.code)
         }
@@ -103,7 +103,7 @@ function Login() {
                     <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
                 </div>
             </div>
-            <Link to="/" className='zurueck'>Zurück</Link>
+            <Link to="../../" className='zurueck'>Zurück</Link>
         </div> 
     </div>
     );

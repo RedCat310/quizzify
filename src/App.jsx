@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     {
         path: "/account/host",
         element: <div>
-            <AppBar create="" account="" host="tag-active"></AppBar>
+            <AppBar create="" account="x" host="tag-active"></AppBar>
             <TransitionComponent>
                 <Host/>
             </TransitionComponent>

@@ -3,6 +3,8 @@ import '../styles/style_start.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../config/firebase'
 
 import { Link, useNavigate } from "react-router-dom";
 // import { useLoaderData } from "react-router-dom";
@@ -19,15 +21,48 @@ function StartPage() {
     const navigate = useNavigate()
     const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
     const enterGame = async () => {
+      setAlert({
+        style: {  }, 
+        searching: {  },
+        notfound: { display: 'none' },
+        error: { display: 'none' }
+      })
       if(gameID){
-        setAlert({
-          style: {  }, 
-          searching: {  },
-          notfound: { display: 'none' },
-          error: { display: 'none' }
-        })
-        await delay(3000)
-        navigate('/' + gameID)
+        let request = await getDoc(doc(db, gameID, "data"))
+        if(request.exists()){
+          let data = request.data()
+          if(data.open === true){
+            navigate('/' + gameID)
+          }else{
+            setAlert({
+              style: {  }, 
+              searching: { display: 'none' },
+              notfound: {  },
+              error: { display: 'none' }
+            })
+            await delay(3000)
+            setAlert({
+              style: { display: 'none' }, 
+              searching: { display: 'none' },
+              notfound: {  },
+              error: { display: 'none' }
+            })
+          }
+        }else{
+          setAlert({
+            style: {  }, 
+            searching: { display: 'none' },
+            notfound: {  },
+            error: { display: 'none' }
+          })
+          await delay(3000)
+          setAlert({
+            style: { display: 'none' }, 
+            searching: { display: 'none' },
+            notfound: {  },
+            error: { display: 'none' }
+          })
+        }
       }else{
         setAlert({
           style: {  }, 

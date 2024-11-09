@@ -86,7 +86,12 @@ function Login() {
     }
     const changeWindow = () =>{
         setRegisterStyle({ width: "600px" })
-        setloginStyle({width: "100px"})
+        setloginStyle({width: "200px"})
+    }
+
+    const changeWindow2 = () =>{
+        setRegisterStyle({ width: "200px" })
+        setloginStyle({width: "600px"})
     }
     return ( 
     <div> 
@@ -117,6 +122,7 @@ function Login() {
                     <input type="password" value={newPasswordRetype} onChange={(e) => setNewPasswordRetype(e.target.value)} placeholder='Passwort wiederholen'/>
                     <button onClick={() => register()}>Registrieren</button><br />
                     <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
+                    <button onClick={changeWindow2}>Einloggen</button>
                 </div>
             </div>
             <Link to="../../" className='zurueck'>Zurück</Link>

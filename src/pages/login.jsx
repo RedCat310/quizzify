@@ -113,13 +113,7 @@ function Login() {
             </div>
             <Link to="../../" className='zurueck'>Zurück</Link>
         </div> 
-<<<<<<< HEAD
-
-        {/* <Link className='zurueck' to='/startPage'>Zurück</Link> */}
-    </div> 
-
     </div>
->>>>>>> d0aa67d7aeb2c2ce03bd805824adf812b0d59927
     );
 }
 

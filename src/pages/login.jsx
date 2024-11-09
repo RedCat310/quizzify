@@ -86,6 +86,7 @@ function Login() {
     }
     const changeWindow = () =>{
         setRegisterStyle({ width: "600px" })
+        setloginStyle({width: "100px"})
     }
     return ( 
     <div> 

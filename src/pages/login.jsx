@@ -5,8 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
-import { style, text } from 'framer-motion/client';
-import { Transition } from 'react-transition-group';
 // import '../components/login.js'
 
 

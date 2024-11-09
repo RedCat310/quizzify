@@ -24,8 +24,8 @@ function Login() {
         info: { display: 'none' },
         loading: { display: 'none' },
     })
-    const [registerStyle, setRegisterStyle] = useState("")
-    const [loginStyle, setloginStyle] = useState("")
+    const [registerStyle, setRegisterStyle] = useState({})
+    const [loginStyle, setloginStyle] = useState({})
 
 
     const signInWithGoogle = async () => {
@@ -85,9 +85,7 @@ function Login() {
         }
     }
     const changeWindow = () =>{
-        setRegisterStyle({
-            style: { width: "600px" }
-        })
+        setRegisterStyle({ width: "600px" })
     }
     return ( 
     <div> 
@@ -101,7 +99,7 @@ function Login() {
             <img src={logo} alt="" className="logo"></img>
 
         <div className='field'>     
-            <div className='login' style={loginStyle.style}>
+            <div className='login' style={loginStyle}>
                 <div className='login-content'>
                 <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
@@ -110,7 +108,7 @@ function Login() {
                     <button onClick={changeWindow}>Registrieren</button>
                 </div>
             </div>
-            <div className='register' style={registerStyle.style}>
+            <div className='register' style={registerStyle}>
                 <div className='register-content'>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
                     <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder='E-Mail' />

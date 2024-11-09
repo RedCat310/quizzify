@@ -27,9 +27,10 @@ function Login() {
     })
     const [registerStyle, setRegisterStyle] = useState({
         content: { display: "none" },
+        change2: {display: "none"}
     })
     const [loginStyle, setloginStyle] = useState({
-        text: { display: "none" }
+        text: { display: "none" },
     })
 
 
@@ -92,23 +93,25 @@ function Login() {
     const changeWindow = () =>{
         setRegisterStyle({
             all: { width: "500px", transition: "500ms ease-in", background: "white" },
-            text: {display: "none"},
-            zurueck: {right: "30px", left: "unset", transition: "500ms ease-in"}
+            text: {display: "none", transition: "500ms ease-in"},
+            zurueck: {right: "30px", left: "unset", transition: "500ms ease-in", background: "#4285f4"},
+            change: {display: "none"}
         })
         setloginStyle({
           all: {width: "200px", transition: "500ms ease-in", background: "#4285f4"},
-          content: {display: "none"}
+          content: {display: "none", transition: "500ms ease-in"}
         })
     }
 
     const changeWindow2 = () =>{
         setRegisterStyle({ 
           all: { width: "200px", transition: "500ms ease-in" },
-          content: {display: "none"},
+          content: {display: "none", transition: "500ms ease-in"},
+          change2: {display: "none"},
         })
         setloginStyle({
            all: { width: "500px", transition: "500ms ease-in" },
-           text: {display: "none"}
+           text: {display: "none", transition: "500ms ease-in"}
         })
     }
     return ( 
@@ -127,27 +130,36 @@ function Login() {
                 <div className='login-text' style={loginStyle.text}>Hallo, Freund!</div>
                 <div className='login-content' style={loginStyle.content}>
                     <div className='login-header' style={loginStyle.header}>Einloggen</div>
-                    <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
-                    <button>Anmelden</button><br />
-                    <button onClick={()=> changeWindow()} style={registerStyle.change}>Registrieren</button>
+                    <button onClick={() => signInWithGoogle()} className='sign-Google-login'><i className="fa-brands fa-google"></i></button>
+                    <div className='login-text-method'>oder nutze dein Account</div>
+                    <div className='login-inputs'>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
+                        <div className='forgot-login'>Passwort vergessen?</div>
+                    </div>
+                    <button className='signIn-login'>Anmelden</button><br />
+                    {/* <button onClick={()=> changeWindow()} style={registerStyle.change}>Registrieren</button> */}
                     <Link to="../../" className='zurueck'>Zurück</Link>
                 </div>
+                <button onClick={changeWindow2} style={registerStyle.change2} className='change-login'>Einloggen</button>
             </div>
             <div className='register' style={registerStyle.all}>
-                <div className='register-text' style={registerStyle.text}>Willkommen Zurück!</div>
+                <div className='register-text' style={registerStyle.text}>Willkommen <br></br> Zurück!</div>
                 <div className='register-content' style={registerStyle.content}>
                     <div className='register-header' style={registerStyle.header}>Registrieren</div>
-                    <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
-                    <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder='E-Mail' />
-                    <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='Passwort'/>
-                    <input type="password" value={newPasswordRetype} onChange={(e) => setNewPasswordRetype(e.target.value)} placeholder='Passwort wiederholen'/>
-                    <button onClick={() => register()}>Registrieren</button><br />
-                    <button onClick={changeWindow2} style={registerStyle.change2}>Einloggen</button>
+                    <button onClick={() => signInWithGoogle()} className='sign-Google-register'><i className="fa-brands fa-google"></i></button>
+                    <div className='register-text-method'>oder Benutze deine Email</div>
+                    <div className='register-inputs'>
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
+                        <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder='E-Mail' />
+                        <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='Passwort'/>
+                        <input type="password" value={newPasswordRetype} onChange={(e) => setNewPasswordRetype(e.target.value)} placeholder='Passwort wiederholen'/>
+                    </div>
+                    <button onClick={() => register()} className='signIn-register'>Registrieren</button><br />
+                    {/* <button onClick={changeWindow2} style={registerStyle.change2}>Einloggen</button> */}
                     <Link to="../../" className='zurueck' style={registerStyle.zurueck}>Zurück</Link>
                 </div>
+                <button onClick={()=> changeWindow()} style={registerStyle.change} className='change-register'>Registrieren</button>
             </div>
         </div> 
     </div>

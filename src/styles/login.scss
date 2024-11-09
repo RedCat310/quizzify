@@ -3,7 +3,7 @@
     position: absolute;
     transform: translate(-50%);
     display: flex;
-    top: 250px;
+    top: 200px;
 }
 
 .logo{
@@ -30,6 +30,10 @@
                 background-color: #f37c88;
             }
 
+.login-inputs{
+    margin-top: 130px;
+}
+
 
 .login input{
     background-color: #eee;
@@ -43,10 +47,27 @@
                 color: black;
             }
 
-.login button{
-    width: 200px;
-    margin-left: 150px;
+            .login input:hover{
+                background-color: rgba(209, 209, 209, 0.534);
+            }
+
+.register input{
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 70%;
+    margin-left: 60px;
 }
+            ::placeholder{
+                color: black;
+            }
+
+            .register input:hover{
+                background-color: rgba(209, 209, 209, 0.534);
+            }
+
+
 
 .login {
     background-color: rgba(255, 255, 255, 0.842) ;
@@ -55,7 +76,7 @@
     display: flex;
     flex-direction: column;
     padding: 40px;
-    height: 400px;
+    height: 500px;
     width: 500px;
     border-radius: 20px 0px 0px 20px;
 }
@@ -65,7 +86,7 @@
     display: flex;
     flex-direction: column;
     padding: 40px;
-    height: 400px;
+    height: 500px;
     width: 200px;
     border-radius: 0px 20px 20px 0px;
     box-shadow: 
@@ -76,6 +97,7 @@
 .register-content{
     display: flex;
     flex-direction: column;
+    transition: 500ms ease-in;
 }
 
 .register-text{
@@ -112,3 +134,128 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
 }
+
+.sign-Google-login{
+    padding: 10px 13px;
+    font-size: 20px;
+    border-radius: 1000px;
+    border: none;
+    position: absolute;
+    margin-top: 0px;
+    left: 260px;
+    cursor: pointer;
+    transition: "500ms ease-in"
+}
+            .sign-Google-login:hover{
+                background-color: rgb(205, 205, 205);
+            }
+
+.login-text-method{
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    top: 170px;
+    margin-left: 160px;
+}
+
+.signIn-login{
+    background-color: #d96570;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    position: absolute;
+    left: 235px;
+    margin-top: 50px;
+    cursor: pointer;
+    transition: "500ms ease-in"
+}
+            .signIn-login:hover{
+                background-color: #f37c88;
+            }
+
+.forgot-login{
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    margin-top: 7px;
+    left: 230px;
+}
+            .forgot-login:hover{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+.change-register{
+    position: absolute;
+    top: 300px;
+    right: 80px;
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: 17px;
+    padding: 10px 10px;
+    color: var(--text-color);
+    border-radius: 30px;
+    cursor: pointer;
+}
+            .change-register:hover{
+                background-color: rgba(255, 255, 255, 0.234);
+            }
+
+.sign-Google-register{
+    padding: 10px 13px;
+    font-size: 20px;
+    border-radius: 1000px;
+    border: none;
+    position: absolute;
+    margin-top: 60px;
+    right: 270px;
+    cursor: pointer;
+    transition: "500ms ease-in"
+}
+            .sign-Google-register:hover{
+                background-color: rgb(205, 205, 205);
+            }
+
+.register-text-method{
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    top: 160px;
+    right: 220px;
+}
+
+.register-inputs{
+    margin-top: 90px;
+}
+
+.signIn-register{
+    background-color: #4285f4;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    position: absolute;
+    right: 235px;
+    bottom: 100px;
+    cursor: pointer;
+}
+            .signIn-register:hover{
+                background-color: #3d79d9;
+            }
+
+.change-login{
+    position: absolute;
+    top: 300px;
+    left: 80px;
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: 17px;
+    padding: 10px 10px;
+    color: var(--text-color);
+    border-radius: 30px;
+    cursor: pointer;
+}
+            .change-login:hover{
+                background-color: rgba(255, 255, 255, 0.234);
+            }

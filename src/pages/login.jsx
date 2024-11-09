@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth, google } from '../config/firebase';
-import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.scss'
 import '../styles/general.scss'
@@ -38,6 +38,23 @@ function Login() {
             navigate('/account')
         } catch (error) {
             console.log(error.code)
+        }
+    }
+    const signIn = async () => {
+        makeAlert(false, true, "Anmelden...", "all")
+        try {
+            let request = await signInWithEmailAndPassword(auth, email, password)
+            if(request.user.emailVerified){
+                navigate("/account")
+            }else{
+                makeAlert(true, false, <div>Die E-Mail ist noch nicht verifiziert. <br></br> Es wurde eine E-Mail mit dem <br></br> Verifizierungslink versendet. <br /> Diese kann auch im Spam-Ordner <br></br>ihres E-Mail-Aanbieters sein.</div>, 6)
+                sendEmailVerification(request.user)
+                signOut(auth)
+                setPassword("")
+                setEmail("")
+            }
+        } catch (error) {
+            makeAlert(true, false, error.code, 4)
         }
     }
     const makeAlert = async (error, loading, message, duration) => {
@@ -82,11 +99,12 @@ function Login() {
                     setNewPassword("")
                     setNewPasswordRetype("")
                     setName("")
-                } catch (error) {
-                    alert(error.code)
-                }
-                await makeAlert("none")
+                    await makeAlert("none")
                 makeAlert(false, false, <div className='alert-text'>Konto erstellt!<br></br>Bitte Überprüfen sie ihr Email-Postfach,<br></br> um ihre Email zu Verifizieren.<br></br>Die E-Mail ist höchstwarscheinlich<br></br> im Spam-Ordner gelandet!</div>, 6)
+                } catch (error) {
+                    makeAlert(true, false, "Es ist ein unbekannter Fehler aufgetreten.", 4)
+                    console.log(error)
+                }
             }else{
                 makeAlert(true, false, "Passwörter stimmen nicht überein", 2)
             }
@@ -140,7 +158,7 @@ function Login() {
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
                         <div className='forgot-login'>Passwort vergessen?</div>
                     </div>
-                    <button className='signIn-login'>Anmelden</button><br />
+                    <button className='signIn-login' onClick={() => signIn()}>Anmelden</button><br />
                     {/* <button onClick={()=> changeWindow()} style={registerStyle.change}>Registrieren</button> */}
                     <Link to="../../" className='zurueck'>Zurück</Link>
                 </div>

@@ -259,3 +259,18 @@
             .change-login:hover{
                 background-color: rgba(255, 255, 255, 0.234);
             }
+
+.alert{
+    position: absolute;
+    background-color: var(--primary-color-opp);
+    left: 50%;
+    top: 400px;
+    transform: translate(-50%, -50%);
+    height: 10em;
+    width: 30em;
+    border-radius: 50px;
+    z-index: 100;
+    display: block;
+    white-space: nowrap;
+    border: 2px solid var(--primary-color);
+    }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth, google } from '../config/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.scss'
 import '../styles/general.scss'
@@ -33,7 +33,7 @@ function Login() {
         }
     }
     const makeAlert = async (error, loading, message, duration) => {
-        if(duration === "none"){
+        if(error === "none"){
             setAlert({
                 style: { display: 'none' },
                 message: "",
@@ -64,7 +64,15 @@ function Login() {
     const register = async () => {
         if(newEmail !== "" && newPassword !== "" && newPasswordRetype !== "" && name !== ""){
             if(newPassword === newPasswordRetype){
-
+                makeAlert(false, true, "Konto erstellen", "all")
+                try {
+                    let data = await createUserWithEmailAndPassword(auth, newEmail, newPassword)
+                    // sendEmailVerification(data.user)
+                    // signOut(auth)
+                } catch (error) {
+                    alert(error.code)
+                }
+                makeAlert(true, false, "Es wurde eine E-Mail an ihre Adresse versendet um zu verifizieren, dass sie es wirklich sind.")
             }else{
                 makeAlert(true, false, "Passwörter stimmen nicht überein", 2)
             }

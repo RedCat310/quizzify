@@ -6,6 +6,7 @@ import '../styles/login.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import { style } from 'framer-motion/client';
+import { Transition } from 'react-transition-group';
 // import '../components/login.js'
 
 
@@ -24,7 +25,9 @@ function Login() {
         info: { display: 'none' },
         loading: { display: 'none' },
     })
-    const [registerStyle, setRegisterStyle] = useState({})
+    const [registerStyle, setRegisterStyle] = useState({
+        content: {display: "none"}
+    })
     const [loginStyle, setloginStyle] = useState({})
 
 
@@ -85,13 +88,23 @@ function Login() {
         }
     }
     const changeWindow = () =>{
-        setRegisterStyle({ width: "600px" })
-        setloginStyle({width: "200px"})
+        setRegisterStyle({
+            all: { width: "500px", transition: "500ms ease-in" },
+        })
+        setloginStyle({
+          all: {width: "200px", transition: "500ms ease-in" },
+          content: {display: "none"}
+        })
     }
 
     const changeWindow2 = () =>{
-        setRegisterStyle({ width: "200px" })
-        setloginStyle({width: "600px"})
+        setRegisterStyle({ 
+          all: { width: "200px", transition: "500ms ease-in" },
+          content: {display: "none"}
+        })
+        setloginStyle({
+           all: { width: "500px", transition: "500ms ease-in" }
+        })
     }
     return ( 
     <div> 
@@ -105,24 +118,24 @@ function Login() {
             <img src={logo} alt="" className="logo"></img>
 
         <div className='field'>     
-            <div className='login' style={loginStyle}>
-                <div className='login-content'>
+            <div className='login' style={loginStyle.all}>
+                <div className='login-content' style={loginStyle.content}>
                 <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='E-Mail' />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Passwort'/>
                     <button>Anmelden</button><br />
-                    <button onClick={()=> changeWindow()}>Registrieren</button>
+                    <button onClick={()=> changeWindow()} style={registerStyle.change}>Registrieren</button>
                 </div>
             </div>
-            <div className='register' style={registerStyle}>
-                <div className='register-content'>
+            <div className='register' style={registerStyle.all}>
+                <div className='register-content' style={registerStyle.content}>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
                     <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder='E-Mail' />
                     <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='Passwort'/>
                     <input type="password" value={newPasswordRetype} onChange={(e) => setNewPasswordRetype(e.target.value)} placeholder='Passwort wiederholen'/>
                     <button onClick={() => register()}>Registrieren</button><br />
                     <button onClick={() => signInWithGoogle()}><i className="fa-brands fa-google"></i> Mit Google anmelden</button>
-                    <button onClick={changeWindow2}>Einloggen</button>
+                    <button onClick={changeWindow2} style={registerStyle.change2}>Einloggen</button>
                 </div>
             </div>
             <Link to="../../" className='zurueck'>Zurück</Link>

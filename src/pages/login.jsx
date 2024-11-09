@@ -87,7 +87,7 @@ function Login() {
                 } catch (error) {
                     alert(error.code)
                 }
-                // makeAlert(true, false, "Es wurde eine E-Mail an ihre Adresse versendet um zu verifizieren, dass sie es wirklich sind.")
+                makeAlert(true, false, "Bitte Überprüfen sie ihr Email-Postfach, um ihre Email zu Verifizieren.")
             }else{
                 makeAlert(true, false, "Passwörter stimmen nicht überein", 2)
             }

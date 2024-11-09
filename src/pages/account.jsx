@@ -14,7 +14,7 @@ function Account() {
     })
     return ( 
         <div>
-            Account Page
+            Account Page <br></br>
             <button onClick={() => signOut(auth)}>Logout</button>
         </div>
      );

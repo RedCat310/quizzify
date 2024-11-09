@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import '../styles/AppBar.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
@@ -6,10 +5,7 @@ import user from '../assets/user.svg'
 import { Link } from "react-router-dom";
 
 function AppBar(props) {
-    useEffect(() => {
-        console.log("tag-1 tag " + props.account)
-    })
-    return ( <div>
+    return ( <div style={props.despawn ? { display: "none" } : {  }}>
         <div className="appBar">
         <img className="logo" src={logo} alt=""></img>
             <div className="tags">

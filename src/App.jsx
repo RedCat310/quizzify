@@ -13,15 +13,18 @@ import AppBar from './components/AppBar';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <TransitionComponent>
-            <StartPage></StartPage>
-        </TransitionComponent>,
+        element: <div>
+        <AppBar create="" account="" host="" despawn={true}></AppBar>
+        <TransitionComponent>
+            <StartPage/>
+        </TransitionComponent>
+    </div>,
         // loader: startPageLoader,
     },
     {
         path: "/account/create",
         element: <div>
-            <AppBar create="tag-active" account="" host=""></AppBar>
+            <AppBar create="tag-active" account="" host="" despawn={false}></AppBar>
             <TransitionComponent>
                 <Create/>
             </TransitionComponent>
@@ -29,14 +32,17 @@ const router = createBrowserRouter([
     },
     {
         path: "/account/login",
-        element: <TransitionComponent>
+        element: <div>
+        <AppBar create="" account="" host="" despawn={true}></AppBar>
+        <TransitionComponent>
             <Login/>
-        </TransitionComponent>,
+        </TransitionComponent>
+    </div>,
     },
     {
         path: "/account",
         element: <div>
-            <AppBar create="" account="tag-active" host=""></AppBar>
+            <AppBar create="" account="tag-active" host="" despawn={false}></AppBar>
             <TransitionComponent>
                 <Account/>
             </TransitionComponent>
@@ -45,7 +51,7 @@ const router = createBrowserRouter([
     {
         path: "/account/host",
         element: <div>
-            <AppBar create="" account="" host="tag-active"></AppBar>
+            <AppBar create="" account="" host="tag-active" despawn={false}></AppBar>
             <TransitionComponent>
                 <Host/>
             </TransitionComponent>
@@ -53,9 +59,12 @@ const router = createBrowserRouter([
     },
     {
         path: "/:id",
-        element: <TransitionComponent>
+        element: <div>
+        <AppBar create="" account="" host="" despawn={true}></AppBar>
+        <TransitionComponent>
             <Game/>
-        </TransitionComponent>,
+        </TransitionComponent>
+    </div>,
     },
 ])
 

@@ -3,6 +3,8 @@ import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
 import { Link } from "react-router-dom";
+import { signOut } from 'firebase/auth'
+import { auth } from '../config/firebase'
 
 function AppBar(props) {
     return ( <div style={props.despawn ? { display: "none" } : {  }}>
@@ -13,7 +15,14 @@ function AppBar(props) {
                 <Link to="/account/create" className={"tag-2 tag " + props.create}><i className="fa-solid fa-pen"></i></Link>
                 <Link to="/account/host" className={"tag-3 tag " + props.host}><i className="fa-solid fa-cloud-arrow-up"></i></Link>
             </div>
-            <img src={user} alt="" className="user"></img>
+            <div className="dropdown">
+                <img src={user} alt="" className="user"></img>
+                <div className="dropdown-content">
+                    <Link>Kontoeinstellungen</Link>
+                    <button onClick={() => signOut(auth)}>Ausloggen</button>
+                </div>
+            </div>
+
         </div>
     </div> );
 }

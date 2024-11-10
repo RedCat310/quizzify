@@ -54,7 +54,12 @@ function Login() {
                 setEmail("")
             }
         } catch (error) {
-            makeAlert(true, false, error.code, 4)
+            if (error.code == "auth/invalid-email"){
+                makeAlert(true, false, "Bitte überprüfe deine Eingaben", 4)
+            }
+            else{
+                makeAlert(true, false, error.code, 4)
+            }
         }
     }
     const makeAlert = async (error, loading, message, duration) => {

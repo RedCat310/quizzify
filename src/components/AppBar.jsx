@@ -2,6 +2,7 @@ import '../styles/AppBar.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
+import user2 from '../assets/user_2.svg'
 import { Link } from "react-router-dom";
 import { signOut } from 'firebase/auth'
 import { auth } from '../config/firebase'
@@ -18,8 +19,17 @@ function AppBar(props) {
             <div className="dropdown">
                 <img src={user} alt="" className="user"></img>
                 <div className="dropdown-content">
-                    <Link>Kontoeinstellungen</Link>
-                    <button onClick={() => signOut(auth)}>Ausloggen</button>
+                <img src={user2} alt="" className="user-dropdown"></img>
+                    <div className='initials-dropdown'>
+                        <div className='user-name'><em>Benutzername</em></div>
+                        <div className='user-email'><em>Benutzer Email</em></div>
+                    </div>
+                    <Link className='settings-dropdown'>Konto-Einstellungen</Link>
+                    <button onClick={() => signOut(auth)} className='signOut-dropdown'>Ausloggen</button>
+                    <div className='impressum-dropdown'>
+                        <div className='data-dropdown'>Datenschutzerklärung</div>
+                        <div className='usage-dropdown'>Nutzungsbedingungen</div>
+                    </div>
                 </div>
             </div>
 

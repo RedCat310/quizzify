@@ -4,7 +4,7 @@ import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
 import { doc, getDoc } from "firebase/firestore";
-import { db } from '../config/firebase'
+import { auth, db } from '../config/firebase'
 
 import { Link, useNavigate } from "react-router-dom";
 // import { useLoaderData } from "react-router-dom";
@@ -136,8 +136,13 @@ function StartPage() {
         </div>
 
         <img src={logo} alt="" className="logo"></img>
-        <img src={user} alt="" className="user"></img>
-  
+        <div className="dropdown1">
+          <img src={user} alt="" className="user"></img>
+          <div className="dropdown-content1">
+            <p>{ auth?.currentUser?.displayName }</p>
+            {auth?.currentUser ? <button>Logout</button> : <Link to="/account/login">Einloggen</Link>}
+          </div>
+        </div>  
       {/* Content Startseite */}
       <div className="content-1">
         <h1>Willkomen bei Quizzify</h1>

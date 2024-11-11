@@ -327,3 +327,44 @@
 .dropdown1:hover .dropdown-content1 {
   display: block;
 }
+
+.dropdown-content1{
+  background-color: rgb(150, 163, 187);
+  min-height: 300px;
+  min-width: 200px;
+  border-radius: 20px;
+}
+
+.user2{
+  background-color: var(--primary-color);
+  height: 40px;
+  padding: 5px;
+  border-radius: 30px;
+  left: 50%;
+  transform: translate(-50%);
+  position: absolute;
+  top: 70px;
+}
+
+.user-name{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  white-space: nowrap;
+}
+
+.signIn-dropdown{
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+      .signIn-dropdown:hover{
+        background-color: rgba(255, 255, 255, 0.281);
+      }

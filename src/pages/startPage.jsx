@@ -6,7 +6,7 @@ import user from '../assets/user.svg'
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, db } from '../config/firebase'
-
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useLoaderData } from "react-router-dom";
 
@@ -172,10 +172,10 @@ function StartPage() {
             })
           }} className="faq-content-1"><i className="fa-solid fa-circle-info"></i>Wie bekomme ich eine ID? </div>
           <button className="new-quiz" onClick={() => {
-            if(user?.currentUser){
+            if(login){
               navigate("/account")
             }else{
-              navigate("/login")
+              navigate("/account/login")
             }
           }}>Erstelle dein eigenes Quiz!</button>
         </div>

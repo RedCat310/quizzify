@@ -4,7 +4,7 @@ import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
 import { doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth, db } from '../config/firebase'
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -147,8 +147,8 @@ function StartPage() {
           <img src={user} alt="" className="user"></img>
           <div className="dropdown-content1">
           <img src={user} alt="" className="user2"></img>
-            <p className="user-name">{ auth?.currentUser?.displayName }</p>
-            {auth?.currentUser ? <button className="signIn-dropdown">Logout</button> : <Link to="/account/login" className="signIn-dropdown">Einloggen</Link>}
+            <p className="user-name">{ login?.displayName }</p>
+            {login ? <button className="signIn-dropdown" onClick={() => signOut(auth)}>Logout</button> : <Link to="/account/login" className="signIn-dropdown">Einloggen</Link>}
           </div>
         </div>  
       {/* Content Startseite */}

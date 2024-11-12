@@ -4,6 +4,7 @@ import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
 import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from 'firebase/auth'
 import { auth, db } from '../config/firebase'
 
 import { Link, useNavigate } from "react-router-dom";
@@ -17,8 +18,14 @@ function StartPage() {
       notfound: { display: 'none' },
       error: { display: 'none' }
     })
+    const [login, setLogin] = useState(null)
     // const result = useLoaderData()
     const navigate = useNavigate()
+    useEffect(() => {
+      onAuthStateChanged(auth, (user) => {
+        setLogin(user)
+      })
+    }, []);
     const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
     const enterGame = async () => {
       setAlert({
@@ -164,7 +171,13 @@ function StartPage() {
               error: { display: 'none' }
             })
           }} className="faq-content-1"><i className="fa-solid fa-circle-info"></i>Wie bekomme ich eine ID? </div>
-          <Link className="new-quiz" to='/account'>Erstelle dein eigenes Quiz!</Link>
+          <button className="new-quiz" onClick={() => {
+            if(user?.currentUser){
+              navigate("/account")
+            }else{
+              navigate("/login")
+            }
+          }}>Erstelle dein eigenes Quiz!</button>
         </div>
       </div>
 

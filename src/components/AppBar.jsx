@@ -4,10 +4,17 @@ import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
 import user2 from '../assets/user_2.svg'
 import { Link } from "react-router-dom";
-import { signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../config/firebase'
+import { useEffect, useState } from 'react'
 
 function AppBar(props) {
+    const [userData, setUserData] = useState(null)
+    useEffect(() => {
+        onAuthStateChanged(auth, (data) => {
+            setUserData(data)
+        })
+    })
     return ( <div style={props.despawn ? { display: "none" } : {  }}>
         <div className="appBar">
         <Link to="/"><img className="logo" src={logo} alt=""></img></Link>
@@ -21,8 +28,8 @@ function AppBar(props) {
                 <div className="dropdown-content">
                 <img src={user2} alt="" className="user-dropdown"></img>
                     <div className='initials-dropdown'>
-                        <div className='user-name'><em>Benutzername</em></div>
-                        <div className='user-email'><em>Benutzer Email</em></div>
+                        <div className='user-name'><em>{userData ? userData.displayName : ""}</em></div><br />
+                        <div className='user-email'><em>{userData ? userData.email : ""}</em></div>
                     </div>
                     <Link className='settings-dropdown'>Konto-Einstellungen</Link>
                     <button onClick={() => signOut(auth)} className='signOut-dropdown'>Ausloggen</button>

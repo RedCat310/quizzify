@@ -25,6 +25,9 @@ function StartPage() {
       onAuthStateChanged(auth, (user) => {
         setLogin(user)
       })
+      if(localStorage.getItem("gameID")){
+        navigate("/" + localStorage.getItem("gameID"))
+      }
     }, []);
     const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
     const enterGame = async () => {

@@ -18,6 +18,11 @@ function Game(){
             let rawData = await getDoc(doc(db, gameID, localStorage.getItem("userID")))
             let data = rawData.data()
             setUsername(data.displayName)
+            onSnapshot(collection(db, gameID), (snap) => {
+                let data = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
+                let score = data.filter((getdata) => getdata.id === localStorage.getItem("userID"))
+                setScore(score[0].score)
+            })
         }
         onAuthStateChanged(auth, (data) => {
             setUser(data)
@@ -33,12 +38,13 @@ function Game(){
         localStorage.setItem("userID", crypto.randomUUID())
         setDoc(doc(db, gameID, localStorage.getItem("userID")), {
             displayName: username,
+            score: 0
         })
         setPage(true)
-        onSnapshot(collection(db, gameID), (data) => {
-            let data = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
-            let score = data.filter()
-            setScore()
+        onSnapshot(collection(db, gameID), (snap) => {
+            let data = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
+            let score = data.filter((getdata) => getdata.id === localStorage.getItem("userID"))
+            setScore(score[0].score)
         })
     }
 
@@ -47,7 +53,7 @@ function Game(){
             {page ? <div className="footer" style={{position: "fixed", bottom: '10px', fontSize: "20px", left: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '10px'}}>
                 <span>{ username }: { score }</span>
             </div> : <div>
-                <input type="text" placeholder="Benutzername eingeben"  value={username} /><br />
+                <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
                 <button onClick={() => join()}>Weiter</button>
             </div> }
         </div>

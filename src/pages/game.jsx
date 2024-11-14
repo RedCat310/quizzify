@@ -7,10 +7,11 @@ import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
 function Game(){
     const params = useParams()
     const gameID = params.id
-    const [page, setPage] = useState(false);
+    const [page, setPage] = useState(null);
     const [user, setUser] = useState(null);
     const [username, setUsername] = useState("")
     const [score, setScore] = useState(0)
+    const [gameData, setGameData] = useState(null)
 
     useEffect(() => {
         async function rejoin() {
@@ -22,6 +23,8 @@ function Game(){
                 let data = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
                 let score = data.filter((getdata) => getdata.id === localStorage.getItem("userID"))
                 setScore(score[0].score)
+                let game = data.filter((getdata) => getdata.id === "data")
+                setGameData(game[0])
             })
         }
         onAuthStateChanged(auth, (data) => {
@@ -45,13 +48,32 @@ function Game(){
             let data = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
             let score = data.filter((getdata) => getdata.id === localStorage.getItem("userID"))
             setScore(score[0].score)
+            let game = data.filter((getdata) => getdata.id === "data")
+                setGameData(game[0])
         })
     }
-
+    const displayData = () => {
+        let firstLetter = ''
+        if(gameData?.status){
+            firstLetter = Array.from(gameData?.status)[0];
+        }
+        if(gameData?.status === "waiting-start") return <div>
+            { username } <br /> Du bist dabei! du solltest deinen Namen jetzt bei deinem/r Moderator:in sehen
+        </div>
+        else if(!gameData) return null
+        else if(firstLetter === 'q') return <div>
+            Question View <br />
+            Question: { gameData.questions[parseInt(Array.from(gameData?.status)[1])].questions }
+        </div>
+        else return <span>Schade, da hat etwas nicht geklappt. versuche deine Seite neu zu laden</span>
+    }
     return(
         <div>
-            {page ? <div className="footer" style={{position: "fixed", bottom: '10px', fontSize: "20px", left: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '10px'}}>
-                <span>{ username }: { score }</span>
+            {page ? <div>
+                <div className="game-content" style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px", textAlign: "center" }}>
+                    { displayData() }
+                </div>
+                <span className="footer" style={{position: "fixed", bottom: '10px', fontSize: "20px", left: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '10px'}}>{ username }: { score }</span>
             </div> : <div>
                 <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
                 <button onClick={() => join()}>Weiter</button>

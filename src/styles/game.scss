@@ -1,0 +1,80 @@
+.userInf{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // background-color: white; //nur zum test
+    height: 500px;
+    width: 400px;
+}
+
+.userPic{
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+}
+
+.current-userPic{
+    color: var(--secondary-color);
+}
+
+.current-userPic .fa-pen{
+    position: absolute;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 1000px;
+    padding: 5px 5px;
+    right: 5px;
+    font-size: 17px;
+    box-shadow: 1px 1px 30px black;
+    cursor: pointer;
+}
+            .current-userPic .fa-pen:hover{
+                background-color: rgb(208, 208, 208);
+                transform: scale(0.96);
+                transition: 200ms ease;
+            }
+
+.active-userPic{
+    height: 120px;
+    border-radius: 1000px;
+}
+
+.inf-join{
+    top: 180px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+}
+
+.inf-join input{
+    outline: none;
+    padding: 15px 25px;
+    border-radius: 100px;
+    font-size: 18px;
+    text-align: center;
+    background-color: var(--secondary-color-min);
+    border: none;
+    color: var(--oppa-text-color);
+}
+            .inf-join input:active{
+                transform: scale(0.96);
+                transition: 200ms ease
+            }
+
+            .inf-join input:hover{
+                background-color: var(--secondary-hover-color);
+            }
+
+            .inf-join input:focus{
+                color: var(--text-color);
+            }
+
+.join{
+    margin-top: 40px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}

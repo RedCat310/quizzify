@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth, db } from '../config/firebase'
 import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
+import '../styles/game.scss'
+import userPic from '../assets/user_picture.png'
+import '../styles/general.scss'
 
 function Game(){
     const params = useParams()
@@ -74,9 +77,19 @@ function Game(){
                     { displayData() }
                 </div>
                 <span className="footer" style={{position: "fixed", bottom: '10px', fontSize: "20px", left: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '10px'}}>{ username }: { score }</span>
-            </div> : <div>
-                <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
-                <button onClick={() => join()}>Weiter</button>
+            </div> : <div className="userInf">
+                <div className="userPic">
+                    <div className="current-userPic">
+                            <img className="active-userPic" src={userPic}></img>
+                            <i class="fa-solid fa-pen"></i>
+                        </div>
+                    <div className="dropdown-userPic"></div>
+                </div>
+                <div className="inf-join">
+                    <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
+                    <button onClick={() => join()} className="join">Weiter</button>
+                </div>
+                <div className="leave">Verlassen</div>
             </div> }
         </div>
     )

@@ -90,15 +90,15 @@ function Game(){
             </div> : <div className="userInf">
                 <div className="userPic">
                     <div className="current-userPic">
-                        <img className="active-userPic" src={userPic}></img>
+                        <img className="active-userPic" src={userPic} onClick={() => openPicWindow()}></img>
                         <i class="fa-solid fa-pen" onClick={() => openPicWindow()}></i>
                     </div>
                 </div>
                 <div className="inf-join">
                     <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
                     <button onClick={() => join()} className="join">Weiter</button>
+                    <div className="leave">Verlassen</div>
                 </div>
-                <div className="leave">Verlassen</div>
                 <div className="dropdown-userPic" style={PicMenu.all}>
                     <div className="pictures-dropdown">
                         <img className="pic" src={userPic}></img>

@@ -20,12 +20,12 @@
 
 .current-userPic .fa-pen{
     position: absolute;
-    bottom: 2px;
+    bottom: 0px;
     background-color: white;
     border-radius: 1000px;
-    padding: 5px 5px;
+    padding: 7px 7px;
     right: 5px;
-    font-size: 17px;
+    font-size: 18px;
     box-shadow: 1px 1px 30px black;
     cursor: pointer;
 }
@@ -38,6 +38,7 @@
 .active-userPic{
     height: 120px;
     border-radius: 1000px;
+    cursor: pointer;
 }
 
 .inf-join{
@@ -85,6 +86,10 @@
                 transition: 200ms;
             }
 
+            .join:hover{
+                background-color: var(--accent-color-blue-hover);
+            }
+
 .dropdown-userPic{
     position: absolute;
     background-color: var(--primary-color);
@@ -116,4 +121,18 @@
             .pic:hover{
                 transform: scale(0.96);
                 transition: 200ms;
+            }
+
+.leave{
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+            .leave:hover{
+                background-color: rgba(255, 0, 0, 0.347);
             }

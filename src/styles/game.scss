@@ -46,12 +46,13 @@
     left: 50%;
     transform: translate(-50%);
     text-align: center;
+    display: flex;
 }
 
 .inf-join input{
     outline: none;
     padding: 15px 25px;
-    border-radius: 100px;
+    border-radius: 100px 0px 0px 100px;
     font-size: 18px;
     text-align: center;
     background-color: var(--secondary-color-min);
@@ -72,9 +73,47 @@
             }
 
 .join{
-    margin-top: 40px;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 15px 25px;
+    border-radius:0px 100px 100px 0px;
     border: none;
     cursor: pointer;
+    background-color: var(--accent-color-blue);
+    font-size: 16px;
 }
+            .join:active{
+                transform: scale(0.95);
+                transition: 200ms;
+            }
+
+.dropdown-userPic{
+    position: absolute;
+    background-color: var(--primary-color);
+    height: 60vh;
+    width: 40vw;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 100;
+    color: var(--secondary-color);
+    top: -50px;
+    border-radius: 30px;
+    overflow: auto;
+}
+
+.pictures-dropdown{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 90%;
+}
+
+.pic{
+    height: 80px;
+    margin-top: 50px;
+    margin-left: 50px;
+    border-radius: 1000px;
+    cursor: pointer;
+}
+            .pic:hover{
+                transform: scale(0.96);
+                transition: 200ms;
+            }

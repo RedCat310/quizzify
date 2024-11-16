@@ -17,8 +17,8 @@ function Account() {
         <div>
             {/* <button onClick={() => signOut(auth)}>Logout</button> */}
             <div className="menu-bar">
-                <div className="new-quiz">Erstellen</div>
-                <div className="numberOfQuiz">2 von 2 angezeigt</div>
+                {/* <div className="neues-quiz">Erstellen</div> */}
+                {/* <div className="numberOfQuiz">2 von 2 angezeigt</div> */}
             </div>
             <div className="projekt-view">
                 <div className="projekt">

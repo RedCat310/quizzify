@@ -112,7 +112,7 @@
     position: absolute;
 }
 
-.new-quiz{
+.neues-quiz{
     background-color: var(--accent-color-blue);
     position: absolute;
     color: black;
@@ -121,13 +121,13 @@
     left: 60px;
     cursor: pointer;
 }
-            .new-quiz:hover{
+            .neues-quiz:hover{
                 background-color: var(--accent-color-blue-hover);
                 transform: scale(1.05);
                 transition: 100ms ease;
             }
 
-            .new-quiz:active{
+            .neues-quiz:active{
                 transform: scale(0.97);
             }
 

@@ -1,0 +1,136 @@
+.header{
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.btn-host{
+    background-color: var(--accent-color-blue);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 20vh;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+}
+            .btn-host:hover{
+                background-color: var(--accent-color-blue-hover);
+            }
+
+.pop-up-host{
+    position: absolute;
+    left: 50%;
+    margin-top: 20vh;
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary-color);
+    height: 500px;
+    width: 700px;
+    border-radius: 20px;
+}
+
+.menu-pop-up{
+    position: absolute;
+    width: 100%;
+    background-color: var(--primary-color); //nicht fertig
+    display: flex;
+    gap: 40px;
+    height: 60px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.menu-btn{
+    margin-left: 30px;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+            .menu-btn:hover{
+                color: rgb(195, 193, 193);
+            }
+
+.active{
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+}
+
+.id-hosting-content{
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%);
+}
+
+.select-quiz{
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+    margin-top: 30px;
+    font-size: 16px;
+    width: 100px;
+    text-align: center;
+    height: 30px;
+    outline: none;
+    background-color: var(--accent-color-blue);
+    border: none;
+    border-radius: 10px;
+}
+
+.select-quiz:hover{
+    background-color: var(--accent-color-blue-hover);
+}
+
+.bestätigen-host{
+    background-color: var(--accent-color-blue);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 300px;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+            .bestätigen-host:hover{
+                background-color: var(--accent-color-blue-hover);
+            }
+
+.pop-up-host .fa-right-from-bracket{
+    font-size: 23px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+            .pop-up-host .fa-right-from-bracket:hover{
+              color: red;
+              transition: 200ms ease;
+            }
+
+.search-text-host{
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+    font-size: 20px;
+    top: 200px;
+}
+
+.loader{
+    left: 200px;
+}
+
+.generated-id{
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    text-align: center;
+    transform: translate(-50%);
+    font-size: 20px;
+}
+
+.alert{
+    display: none;
+}

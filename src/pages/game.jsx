@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth, db } from '../config/firebase'
 import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
+import '../styles/game.scss'
+import userPic from '../assets/user_picture.png'
+import '../styles/general.scss'
 
 function Game(){
     const params = useParams()
@@ -14,6 +17,9 @@ function Game(){
     const [score, setScore] = useState(0)
     const [gameData, setGameData] = useState(null)
     const [selectedAnswer, setSelectedAnswer] = useState(null)
+    const [PicMenu, setPicMenu] = useState({
+        all: {display: "none"}
+    })
 
     useEffect(() => {
         async function rejoin() {
@@ -76,6 +82,13 @@ function Game(){
         </div>
         else return <span>Schade, da hat etwas nicht geklappt. versuche deine Seite neu zu laden</span>
     }
+
+    const openPicWindow = () => {
+        setPicMenu({
+            all: {display: "block"}
+        })
+    }
+
     return(
         <div>
             {page ? <div>
@@ -83,9 +96,34 @@ function Game(){
                     { displayData() }
                 </div>
                 <span className="footer" style={{position: "fixed", bottom: '10px', fontSize: "20px", left: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '10px'}}>{ username }: { score }</span>
-            </div> : <div>
-                <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
-                <button onClick={() => join()}>Weiter</button>
+            </div> : <div className="userInf">
+                <div className="userPic">
+                    <div className="current-userPic">
+                        <img className="active-userPic" src={userPic} onClick={() => openPicWindow()}></img>
+                        <i class="fa-solid fa-pen" onClick={() => openPicWindow()}></i>
+                    </div>
+                </div>
+                <div className="inf-join">
+                    <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
+                    <button onClick={() => join()} className="join">Weiter</button>
+                    <div className="leave">Verlassen</div>
+                </div>
+                <div className="dropdown-userPic" style={PicMenu.all}>
+                    <div className="pictures-dropdown">
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        <img className="pic" src={userPic}></img>
+                        {/* Bilder Links müssen noch geändert werden */}
+                    </div>
+                </div>
             </div> }
             <button onClick={() => {
                 navigate("/")

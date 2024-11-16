@@ -1,0 +1,138 @@
+.userInf{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // background-color: white; //nur zum test
+    height: 500px;
+    width: 400px;
+}
+
+.userPic{
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+}
+
+.current-userPic{
+    color: var(--secondary-color);
+}
+
+.current-userPic .fa-pen{
+    position: absolute;
+    bottom: 0px;
+    background-color: white;
+    border-radius: 1000px;
+    padding: 7px 7px;
+    right: 5px;
+    font-size: 18px;
+    box-shadow: 1px 1px 30px black;
+    cursor: pointer;
+}
+            .current-userPic .fa-pen:hover{
+                background-color: rgb(208, 208, 208);
+                transform: scale(0.96);
+                transition: 200ms ease;
+            }
+
+.active-userPic{
+    height: 120px;
+    border-radius: 1000px;
+    cursor: pointer;
+}
+
+.inf-join{
+    top: 180px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    display: flex;
+}
+
+.inf-join input{
+    outline: none;
+    padding: 15px 25px;
+    border-radius: 100px 0px 0px 100px;
+    font-size: 18px;
+    text-align: center;
+    background-color: var(--secondary-color-min);
+    border: none;
+    color: var(--oppa-text-color);
+}
+            .inf-join input:active{
+                transform: scale(0.96);
+                transition: 200ms ease
+            }
+
+            .inf-join input:hover{
+                background-color: var(--secondary-hover-color);
+            }
+
+            .inf-join input:focus{
+                color: var(--text-color);
+            }
+
+.join{
+    padding: 15px 25px;
+    border-radius:0px 100px 100px 0px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--accent-color-blue);
+    font-size: 16px;
+}
+            .join:active{
+                transform: scale(0.95);
+                transition: 200ms;
+            }
+
+            .join:hover{
+                background-color: var(--accent-color-blue-hover);
+            }
+
+.dropdown-userPic{
+    position: absolute;
+    background-color: var(--primary-color);
+    height: 60vh;
+    width: 40vw;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 100;
+    color: var(--secondary-color);
+    top: -50px;
+    border-radius: 30px;
+    overflow: auto;
+}
+
+.pictures-dropdown{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 90%;
+}
+
+.pic{
+    height: 80px;
+    margin-top: 50px;
+    margin-left: 50px;
+    border-radius: 1000px;
+    cursor: pointer;
+}
+            .pic:hover{
+                transform: scale(0.96);
+                transition: 200ms;
+            }
+
+.leave{
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+            .leave:hover{
+                background-color: rgba(255, 0, 0, 0.456);
+            }

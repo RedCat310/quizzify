@@ -24,10 +24,10 @@
 .pop-up-host{
     position: absolute;
     left: 50%;
-    margin-top: 20vh;
+    margin-top: 40vh;
     transform: translate(-50%, -50%);
     background-color: var(--secondary-color);
-    height: 500px;
+    height: 50vh;
     width: 700px;
     border-radius: 20px;
 }
@@ -88,7 +88,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    top: 300px;
+    top: 20vh;
     color: black;
     padding: 10px 20px;
     border-radius: 30px;

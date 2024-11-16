@@ -5,9 +5,6 @@ import '../styles/host.scss'
 
 function Host() {
     const navigate = useNavigate()
-    const [PopUpStyle, setPopUpStyle] = useState({
-        all: {display: "none"}
-    })
     const [otherHosting, setotherHosting] = useState({
         all: {display: "none"}
     })
@@ -17,25 +14,13 @@ function Host() {
     //     }
     // })
 
-    const showPopUp = () => {
-        setPopUpStyle({
-            all: {display: "block"}
-        })
-    }
-    const closePopUp = () => {
-        setPopUpStyle({
-            all: {display: "none"}
-        })
-    }
     return ( <div>
-        <div className="header">Hoste dein Quiz</div>
-        <div className="btn-host" onClick={() => showPopUp()}>Hosten</div>
 
-        <div className="pop-up-host" style={PopUpStyle.all}>
+        <div className="pop-up-host">
             <div className="menu-pop-up">
                 <div className="menu-btn active">Mit ID</div>
                 <div className="menu-btn">Mit anderer Variante</div>
-                <i class="fa-solid fa-right-from-bracket" onClick={() => closePopUp()}></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
             </div>
             <div className="id-hosting">
                 <div className="id-hosting-content">

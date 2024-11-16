@@ -18,6 +18,7 @@ function Account() {
             {/* <button onClick={() => signOut(auth)}>Logout</button> */}
             <div className="menu-bar">
                 <div className="new-quiz">Erstellen</div>
+                <div className="numberOfQuiz">2 von 2 angezeigt</div>
             </div>
             <div className="projekt-view">
                 <div className="projekt">
@@ -36,9 +37,14 @@ function Account() {
                         <div className="circle"></div>
                         <div className="circle"></div>
                     </div>
-                    <div className="projekt-name">Test 1</div>
+                    <div className="projekt-name-1">
+                        <div className="projekt-name">Test 1</div>
+                    </div>
                     <div className="create-date">15.11.2024</div>
                 </div>
+
+
+
                 <div className="projekt">
                     <i class="fa-solid fa-trash"></i>
                     <div className="circles">
@@ -55,7 +61,9 @@ function Account() {
                         <div className="circle"></div>
                         <div className="circle"></div>
                     </div>
-                    <div className="projekt-name">Test 2</div>
+                    <div className="projekt-name-1">
+                        <div className="projekt-name">Test 2</div>
+                    </div>
                     <div className="create-date">15.11.2024</div>
                 </div>
 

@@ -34,15 +34,19 @@
                 transition: 200ms ease;
             }
 
-.projekt-name{
+.projekt-name-1{
+    width: 240px;
     font-size: 20px;
     top: 200px;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
+    text-align: center;
+}
+
+.projekt-name{
     background-color: var(--primary-color);
     padding: 5px 20px;
-    padding-right: 25px;
 }
             .projekt-name .fa-pen{
                 font-size: 15px;
@@ -103,6 +107,33 @@
                 transition: 200ms;
             }
 
+.menu-bar{
+    top: 150px;
+    position: absolute;
+}
+
 .new-quiz{
-    
+    background-color: var(--accent-color-blue);
+    position: absolute;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 50px;
+    left: 60px;
+    cursor: pointer;
+}
+            .new-quiz:hover{
+                background-color: var(--accent-color-blue-hover);
+                transform: scale(1.05);
+                transition: 100ms ease;
+            }
+
+            .new-quiz:active{
+                transform: scale(0.97);
+            }
+
+.numberOfQuiz{
+    position: absolute;
+    white-space: nowrap;
+    left: 500px;
+    top: 10px;
 }

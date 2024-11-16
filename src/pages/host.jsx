@@ -52,7 +52,8 @@ function Host() {
             </div>
         </div>
 
-        <div className="alert">
+        {/* ist im style display none */}
+        <div className="alert"> 
             <div className="loader"></div>
             <div className="search-text-host">ID wird erstellt...</div>
             <div className="generated-id">

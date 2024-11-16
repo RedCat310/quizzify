@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth, db } from '../config/firebase'
 import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
 
 function Game(){
     const params = useParams()
+    const navigate = useNavigate()
     const gameID = params.id
     const [page, setPage] = useState(null);
     const [user, setUser] = useState(null);
     const [username, setUsername] = useState("")
     const [score, setScore] = useState(0)
     const [gameData, setGameData] = useState(null)
+    const [selectedAnswer, setSelectedAnswer] = useState(null)
 
     useEffect(() => {
         async function rejoin() {
@@ -62,8 +64,15 @@ function Game(){
         </div>
         else if(!gameData) return null
         else if(firstLetter === 'q') return <div>
-            Question View <br />
-            Question: { gameData.questions[parseInt(Array.from(gameData?.status)[1])].questions }
+            { gameData.questions[parseInt(Array.from(gameData?.status)[1])].question }
+            <div>
+                { gameData?.questions[parseInt(Array.from(gameData?.status)[1])]?.answers?.map((element) => (
+                    <div key={element.id}>
+                        <input type="radio" name="answers" onClick={() => setSelectedAnswer(element.id)} />
+                        <label htmlFor="input">{ element.value }</label>
+                    </div>
+                )) }
+            </div>
         </div>
         else return <span>Schade, da hat etwas nicht geklappt. versuche deine Seite neu zu laden</span>
     }
@@ -78,6 +87,11 @@ function Game(){
                 <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
                 <button onClick={() => join()}>Weiter</button>
             </div> }
+            <button onClick={() => {
+                navigate("/")
+                localStorage.removeItem("gameID")
+                localStorage.removeItem("userID")
+            }}>Verlassen</button>
         </div>
     )
 }

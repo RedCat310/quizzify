@@ -142,3 +142,56 @@
             .leave:hover{
                 background-color: rgba(255, 0, 0, 0.456);
             }
+
+.awnser-container{
+    width: 100%;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.question-awnser{
+    width: 48%;
+    height: 100px;
+    border-radius: 20px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    margin-right: 1%;
+    margin-left: 1%;
+    cursor: pointer;
+}
+            .question-awnser:hover{
+                transform: scale(0.99);
+                transition: 200ms ease;
+                background-color: white;
+            }
+
+            .question-awnser:active{
+                transform: scale(0.96);
+                transition: 100ms ease;
+            }
+
+.question-awnser:nth-child(1){
+    background-color: white;
+}
+
+.question-awnser:nth-child(2){
+    background-color: white;
+}
+.question-awnser:nth-child(3){
+    background-color: white;
+}
+.question-awnser:nth-child(4){
+    background-color: white;
+}
+
+.question{
+    font-size: 25px;
+    left: 50%;
+    transform: translate(-50%);
+    top: 150px;
+    position: absolute;
+}

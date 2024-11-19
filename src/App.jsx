@@ -7,17 +7,15 @@ import Account from './pages/account';
 import Login from './pages/login';
 import Create from './pages/create';
 import Host from './pages/host';
-import TransitionComponent from './components/transition';
 import AppBar from './components/AppBar';
+import HostPage from './pages/hostPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <div>
         <AppBar create="" account="" host="" despawn={true}></AppBar>
-        <TransitionComponent>
             <StartPage/>
-        </TransitionComponent>
     </div>,
         // loader: startPageLoader,
     },
@@ -25,45 +23,39 @@ const router = createBrowserRouter([
         path: "/account/create",
         element: <div>
             <AppBar create="tag-active" account="" host="" despawn={false}></AppBar>
-            <TransitionComponent>
                 <Create/>
-            </TransitionComponent>
         </div>,
     },
     {
         path: "/account/login",
         element: <div>
         <AppBar create="" account="" host="" despawn={true}></AppBar>
-        <TransitionComponent>
             <Login/>
-        </TransitionComponent>
     </div>,
     },
     {
         path: "/account",
         element: <div>
             <AppBar create="" account="tag-active" host="" despawn={false}></AppBar>
-            <TransitionComponent>
                 <Account/>
-            </TransitionComponent>
         </div>,
     },
     {
         path: "/account/host",
         element: <div>
             <AppBar create="" account="" host="tag-active" despawn={false}></AppBar>
-            <TransitionComponent>
                 <Host/>
-            </TransitionComponent>
         </div>,
+    },
+    {
+        path: "/account/host/:id",
+        element: <HostPage/>,
     },
     {
         path: "/:id",
         element: <div>
         <AppBar create="" account="" host="" despawn={true}></AppBar>
-        <TransitionComponent>
             <Game/>
-        </TransitionComponent>
         </div>,
         future: {
             v7_fetcherPersist: true,

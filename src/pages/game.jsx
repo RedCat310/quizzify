@@ -1,135 +1,143 @@
-import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { onAuthStateChanged } from "firebase/auth"
-import { auth, db } from '../config/firebase'
-import { collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
 import '../styles/game.scss'
 import userPic from '../assets/user_picture.png'
 import '../styles/general.scss'
+import { useEffect, useState } from "react"
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
+import { db } from "../config/firebase"
+import { CountdownCircleTimer } from "react-countdown-circle-timer"
 
 function Game(){
     const params = useParams()
     const navigate = useNavigate()
-    const gameID = params.id
-    const [page, setPage] = useState(null);
-    const [user, setUser] = useState(null);
+    const [picMenu, setPicMenu] = useState({display: 'none'})
     const [username, setUsername] = useState("")
-    const [score, setScore] = useState(0)
-    const [gameData, setGameData] = useState(null)
-    const [selectedAnswer, setSelectedAnswer] = useState(null)
-    const [PicMenu, setPicMenu] = useState({
-        all: {display: "none"}
-    })
+    const [page, setPage] = useState(false)
+    const openPicWindow = () => {
+        setPicMenu({display: "block"})
+    }
+    const [currentQ, setCurrentQ] = useState(null);
+    const [gameData, setGameData] = useState(null);
+    const [userID, setUserID] = useState(null);
+    const [answered, setAnswered] = useState(false);
+    const [timer, setTimer] = useState({
+        running: false,
+        duration: 0,
+
+    });
 
     useEffect(() => {
-        async function rejoin() {
+        async function getData() {
+            let data = await getDoc(doc(db, params.id, "data"))
+            setGameData(data.data())
+        }
+        getData()
+    })
+    const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
+    const startQuiz = async  () => {
+        if(username !== ""){
             setPage(true)
-            let rawData = await getDoc(doc(db, gameID, localStorage.getItem("userID")))
-            let data = rawData.data()
-            setUsername(data.displayName)
-            onSnapshot(collection(db, gameID), (snap) => {
-                let data = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
-                let score = data.filter((getdata) => getdata.id === localStorage.getItem("userID"))
-                setScore(score[0].score)
-                let game = data.filter((getdata) => getdata.id === "data")
-                setGameData(game[0])
+            let uid = crypto.randomUUID()
+            setUserID(uid)
+            setDoc(doc(db, params.id, uid), {
+                name: username,
+                doneQ: 0,
+            })
+            // setDoc(doc(db, params.id, userID), {
+            //     name: username,
+            //     doneQ: 0
+            // })
+            setCurrentQ([gameData.questions[0], 0])
+            setTimer({
+                running: true,
+                duration: gameData.questions[0].time,
             })
         }
-        onAuthStateChanged(auth, (data) => {
-            setUser(data)
-            if(data){
-                setUsername(data.displayName)
-            }
-        })
-        if(localStorage.getItem("userID")) rejoin()
-    })
-
-    const join = () => {
-        localStorage.setItem("gameID", gameID)
-        localStorage.setItem("userID", crypto.randomUUID())
-        setDoc(doc(db, gameID, localStorage.getItem("userID")), {
-            displayName: username,
-            score: 0
-        })
-        setPage(true)
-        onSnapshot(collection(db, gameID), (snap) => {
-            let data = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
-            let score = data.filter((getdata) => getdata.id === localStorage.getItem("userID"))
-            setScore(score[0].score)
-            let game = data.filter((getdata) => getdata.id === "data")
-                setGameData(game[0])
-        })
     }
-    const displayData = () => {
-        let firstLetter = ''
-        if(gameData?.status){
-            firstLetter = Array.from(gameData?.status)[0];
+    const submitAnswer = async (ans) => {
+        let s = await getDoc(doc(db, params.id, userID))
+        let data = s.data()
+        if(data?.doneQ === 0){
+            updateDoc(doc(db, params.id, userID), {
+                doneQ: 1,
+                answers: [ans],
+            })
+        }else{
+            data.answers[currentQ[1]] = ans
+            data.doneQ++
+            console.log(data)
+            setDoc(doc(db, params.id, userID), data)
         }
-        if(gameData?.status === "waiting-start") return <div>
-            { username } <br /> Du bist dabei! du solltest deinen Namen jetzt bei deinem/r Moderator:in sehen
-        </div>
-        else if(!gameData) return null
-        else if(firstLetter === 'q') return <div>
-            { gameData.questions[parseInt(Array.from(gameData?.status)[1])].question }
-            <div>
-                { gameData?.questions[parseInt(Array.from(gameData?.status)[1])]?.answers?.map((element) => (
-                    <div key={element.id}>
-                        <input type="radio" name="answers" onClick={() => setSelectedAnswer(element.id)} />
-                        <label htmlFor="input">{ element.value }</label>
-                    </div>
-                )) }
+            setTimer({
+                running: false,
+                duration: gameData.questions[currentQ[1]++].time,
+            })
+            setTimer({
+                running: true,
+                duration: gameData.questions[currentQ[1]++].time,
+            })
+            setCurrentQ([gameData.questions[currentQ[1]++], currentQ[1]++])
+    }
+    const renderTime = ({ remainingTime }) => {
+        if (remainingTime === 0) {
+            
+            return <div className="timer">Done</div>;
+          }
+        
+          return (
+            <div className="timer">
+              <div className="text">Remaining</div>
+              <div className="value">{remainingTime}</div>
+              <div className="text">seconds</div>
             </div>
-        </div>
-        else return <span>Schade, da hat etwas nicht geklappt. versuche deine Seite neu zu laden</span>
+          );
     }
-
-    const openPicWindow = () => {
-        setPicMenu({
-            all: {display: "block"}
-        })
-    }
-
     return(
         <div>
             {page ? <div>
-                <div className="game-content" style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px", textAlign: "center" }}>
-                    { displayData() }
-                </div>
-                <span className="footer" style={{position: "fixed", bottom: '10px', fontSize: "20px", left: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '10px'}}>{ username }: { score }</span>
+                <CountdownCircleTimer
+                    isPlaying={timer.running}
+                    duration={timer.duration}
+                    colors={["#004777"]}
+                    colorsTime={[100]}
+                    onComplete={() => ({ shouldRepeat: false, delay: 1 })}
+                >
+                {renderTime}
+                </CountdownCircleTimer>
+                <h1>{ currentQ[0]?.question }</h1>
+                { currentQ[0]?.answers?.map((ans, index) => (
+                    <button key={index} onClick={() => submitAnswer(ans.type)}>{ ans.value }</button>
+                )) }
             </div> : <div className="userInf">
                 <div className="userPic">
                     <div className="current-userPic">
-                        <img className="active-userPic" src={userPic} onClick={() => openPicWindow()}></img>
-                        <i class="fa-solid fa-pen" onClick={() => openPicWindow()}></i>
+                        <img className="active-userPic" src={userPic} onClick={() => openPicWindow()} alt=""></img>
+                        <i className="fa-solid fa-pen" onClick={() => openPicWindow()}></i>
                     </div>
                 </div>
                 <div className="inf-join">
                     <input type="text" placeholder="Benutzername eingeben" onChange={(e) => setUsername(e.target.value)}  value={username} /><br />
-                    <button onClick={() => join()} className="join">Weiter</button>
-                    <div className="leave">Verlassen</div>
+                    <button className="join" onClick={() => startQuiz()}>Quiz starten</button>
+                    <div className="leave" onClick={() => navigate("/")}>Verlassen</div>
                 </div>
-                <div className="dropdown-userPic" style={PicMenu.all}>
+                <div className="dropdown-userPic" style={picMenu}>
                     <div className="pictures-dropdown">
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
-                        <img className="pic" src={userPic}></img>
+                        <i className="fa-regular fa-circle-xmark" onClick={() => setPicMenu({ display: "none" })}></i>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
+                        <img className="pic" src={userPic} alt=""></img>
                         {/* Bilder Links müssen noch geändert werden */}
                     </div>
                 </div>
-            </div> }
-            <button onClick={() => {
-                navigate("/")
-                localStorage.removeItem("gameID")
-                localStorage.removeItem("userID")
-            }}>Verlassen</button>
+            </div>}
         </div>
     )
 }

@@ -73,6 +73,11 @@
                 color: var(--text-color);
             }
 
+            .inf-join input::placeholder{
+                color: var(--oppa-text-color);
+                opacity: 0.9;
+            }
+
 .join{
     padding: 15px 25px;
     border-radius:0px 100px 100px 0px;
@@ -80,6 +85,7 @@
     cursor: pointer;
     background-color: var(--accent-color-blue);
     font-size: 16px;
+    white-space: nowrap;
 }
             .join:active{
                 transform: scale(0.95);

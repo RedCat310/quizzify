@@ -61,7 +61,7 @@ function Game(){
                 { done ? <div>
                     fertig!
                 </div> : <div>
-                    { game?.questions[curentQuestion].question }
+                    <p>{ game?.questions[curentQuestion].question }</p>
                     { game?.questions[curentQuestion].answers.map((ans, index) => (
                         <button key={index} onClick={() => setAns(ans.type)}>{ ans.value }</button>
                     )) }

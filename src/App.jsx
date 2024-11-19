@@ -64,13 +64,18 @@ const router = createBrowserRouter([
         <TransitionComponent>
             <Game/>
         </TransitionComponent>
-    </div>,
+        </div>,
+        future: {
+            v7_fetcherPersist: true,
+          },
     },
 ])
 
 function App(){
 
-    return (<RouterProvider router={router} />);
+    return (<RouterProvider router={router} future={{
+        v7_relativeSplatPath: true,
+      }} />);
 }
 
 export default App;

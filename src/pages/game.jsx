@@ -3,7 +3,7 @@ import '../styles/game.scss'
 import userPic from '../assets/user_picture.png'
 import '../styles/general.scss'
 import { useEffect, useState } from "react"
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
+import { collection, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
 
@@ -13,101 +13,59 @@ function Game(){
     const [picMenu, setPicMenu] = useState({display: 'none'})
     const [username, setUsername] = useState("")
     const [page, setPage] = useState(false)
+    const [curentQuestion, setCurentQuestion] = useState(null);
+    const [userID, setUserID] = useState(null);
+    const [done, setDone] = useState(false);
+
     const openPicWindow = () => {
         setPicMenu({display: "block"})
     }
-    const [currentQ, setCurrentQ] = useState(null);
-    const [gameData, setGameData] = useState(null);
-    const [userID, setUserID] = useState(null);
-    const [answered, setAnswered] = useState(false);
-    const [timer, setTimer] = useState({
-        running: false,
-        duration: 0,
-
-    });
-
+    const [game, setGame] = useState(null);
+    const [player, setPlayer] = useState(null);
     useEffect(() => {
-        async function getData() {
-            let data = await getDoc(doc(db, params.id, "data"))
-            setGameData(data.data())
-        }
-        getData()
+        onSnapshot(collection(db, params.id), (snap) => {
+            let docs = snap.docs.map((doc) => ({...doc.data(), id: doc.id}))
+            setGame(docs.filter((doc) => doc.id === "data")[0])
+            setPlayer(docs.filter((doc) => doc.id === userID)[0])
+        })
     })
-    const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
-    const startQuiz = async  () => {
-        if(username !== ""){
-            setPage(true)
-            let uid = crypto.randomUUID()
-            setUserID(uid)
-            setDoc(doc(db, params.id, uid), {
-                name: username,
-                doneQ: 0,
-            })
-            // setDoc(doc(db, params.id, userID), {
-            //     name: username,
-            //     doneQ: 0
-            // })
-            setCurrentQ([gameData.questions[0], 0])
-            setTimer({
-                running: true,
-                duration: gameData.questions[0].time,
-            })
-        }
+
+    const startQuiz = async () => {
+        setPage(true)
+        setCurentQuestion(0)
+        let id = crypto.randomUUID()
+        setUserID(id)
+        setDoc(doc(db, params.id, id), {
+            name: username,
+            doneQ: 0
+        })
     }
-    const submitAnswer = async (ans) => {
-        let s = await getDoc(doc(db, params.id, userID))
-        let data = s.data()
-        if(data?.doneQ === 0){
-            updateDoc(doc(db, params.id, userID), {
-                doneQ: 1,
-                answers: [ans],
-            })
-        }else{
-            data.answers[currentQ[1]] = ans
-            data.doneQ++
-            console.log(data)
-            setDoc(doc(db, params.id, userID), data)
+    const setAns = (ans) => {
+        let newData = player.answers
+        if(newData){
+            newData[curentQuestion] = ans
         }
-            setTimer({
-                running: false,
-                duration: gameData.questions[currentQ[1]++].time,
-            })
-            setTimer({
-                running: true,
-                duration: gameData.questions[currentQ[1]++].time,
-            })
-            setCurrentQ([gameData.questions[currentQ[1]++], currentQ[1]++])
-    }
-    const renderTime = ({ remainingTime }) => {
-        if (remainingTime === 0) {
-            
-            return <div className="timer">Done</div>;
-          }
-        
-          return (
-            <div className="timer">
-              <div className="text">Remaining</div>
-              <div className="value">{remainingTime}</div>
-              <div className="text">seconds</div>
-            </div>
-          );
+        else{
+            newData = [ans]
+        }
+        updateDoc(doc(db, params.id, userID), {
+            answers: newData,
+            doneQ: player.doneQ + 1
+        })
+        if(game.questions[curentQuestion + 1]){setCurentQuestion(curentQuestion + 1) }
+        else setDone(true)
     }
     return(
         <div>
             {page ? <div>
-                <CountdownCircleTimer
-                    isPlaying={timer.running}
-                    duration={timer.duration}
-                    colors={["#004777"]}
-                    colorsTime={[100]}
-                    onComplete={() => ({ shouldRepeat: false, delay: 1 })}
-                >
-                {renderTime}
-                </CountdownCircleTimer>
-                <h1>{ currentQ[0]?.question }</h1>
-                { currentQ[0]?.answers?.map((ans, index) => (
-                    <button key={index} onClick={() => submitAnswer(ans.type)}>{ ans.value }</button>
-                )) }
+                { done ? <div>
+                    fertig!
+                </div> : <div>
+                    { game?.questions[curentQuestion].question }
+                    { game?.questions[curentQuestion].answers.map((ans, index) => (
+                        <button key={index} onClick={() => setAns(ans.type)}>{ ans.value }</button>
+                    )) }
+                </div>}
             </div> : <div className="userInf">
                 <div className="userPic">
                     <div className="current-userPic">

@@ -2,10 +2,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import '../styles/game.scss'
 import userPic from '../assets/user_picture.png'
 import '../styles/general.scss'
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { collection, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
 import { db } from "../config/firebase"
-import { CountdownCircleTimer } from "react-countdown-circle-timer"
 
 function Game(){
     const params = useParams()
@@ -16,7 +15,9 @@ function Game(){
     const [curentQuestion, setCurentQuestion] = useState(null);
     const [userID, setUserID] = useState(null);
     const [done, setDone] = useState(false);
-
+    const [timer, setTimer] = useState({
+        date: 0
+    });
     const openPicWindow = () => {
         setPicMenu({display: "block"})
     }
@@ -39,6 +40,10 @@ function Game(){
             name: username,
             doneQ: 0
         })
+        setTimer({
+            
+            time: game.questions[0].time
+        })
     }
     const setAns = (ans) => {
         let newData = player.answers
@@ -52,15 +57,22 @@ function Game(){
             answers: newData,
             doneQ: player.doneQ + 1
         })
-        if(game.questions[curentQuestion + 1]){setCurentQuestion(curentQuestion + 1) }
+        if(game.questions[curentQuestion + 1]){
+            setTimer({
+                time: game.questions[curentQuestion + 1].time
+            })
+            setCurentQuestion(curentQuestion + 1) 
+        }
         else setDone(true)
     }
+        
     return(
         <div>
             {page ? <div>
                 { done ? <div>
                     fertig!
                 </div> : <div>
+                    
                     { game?.questions[curentQuestion].question }
                     { game?.questions[curentQuestion].answers.map((ans, index) => (
                         <button key={index} onClick={() => setAns(ans.type)}>{ ans.value }</button>

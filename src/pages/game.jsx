@@ -2,8 +2,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import '../styles/game.scss'
 import userPic from '../assets/user_picture.png'
 import '../styles/general.scss'
-import { useEffect, useRef, useState } from "react"
-import { collection, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
+import { useEffect, useState } from "react"
+import { collection, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
 import { db } from "../config/firebase"
 
 function Game(){
@@ -15,9 +15,6 @@ function Game(){
     const [curentQuestion, setCurentQuestion] = useState(null);
     const [userID, setUserID] = useState(null);
     const [done, setDone] = useState(false);
-    const [timer, setTimer] = useState({
-        date: 0
-    });
     const openPicWindow = () => {
         setPicMenu({display: "block"})
     }
@@ -41,10 +38,6 @@ function Game(){
                 name: username,
                 doneQ: 0
             })
-            setTimer({
-                
-                time: game.questions[0].time
-            })
         }else alert("Du hast keinen Benutzername eingegeben oder das quiz ist schon vorbei.")
     }
     const setAns = (ans) => {
@@ -60,9 +53,6 @@ function Game(){
             doneQ: player.doneQ + 1
         })
         if(game.questions[curentQuestion + 1]){
-            setTimer({
-                time: game.questions[curentQuestion + 1].time
-            })
             setCurentQuestion(curentQuestion + 1) 
         }
         else setDone(true)

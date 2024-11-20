@@ -2,7 +2,6 @@ import '../styles/AppBar.scss'
 import '../styles/general.scss'
 import logo from '../assets/no_back_logo.png'
 import user from '../assets/user.svg'
-import user2 from '../assets/user_2.svg'
 import { Link } from "react-router-dom";
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../config/firebase'

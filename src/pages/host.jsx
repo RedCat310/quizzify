@@ -149,6 +149,7 @@ function Host() {
 
         <div className="alert" style={loader}>
             <div className="loader"></div><br></br><br></br>
+
             <div className="search-text-host">ID wird erstellt...</div>
         </div>
     </div> );

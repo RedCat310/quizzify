@@ -27,7 +27,7 @@
     position: absolute;
     right: 30px;
     bottom: 20px;
-    font-size: 20px;
+    font-size: 18px;
 }
             .projekt .fa-trash:hover{
                 color: red;
@@ -36,7 +36,7 @@
 
 .projekt-name-1{
     width: 240px;
-    font-size: 20px;
+    font-size: 19px;
     top: 200px;
     position: absolute;
     left: 50%;
@@ -46,7 +46,7 @@
 
 .projekt-name{
     background-color: var(--primary-color);
-    padding: 5px 20px;
+    padding: 4px 20px;
 }
             .projekt-name .fa-pen{
                 font-size: 15px;
@@ -136,4 +136,120 @@
     white-space: nowrap;
     left: 500px;
     top: 10px;
+}
+
+.create-new-quiz-popup{
+    position: absolute;
+    height: 500px;
+    width: 700px;
+    background-color: #2f363e;
+    z-index: 100;
+    left: 50%;
+    transform: translate(-50%);
+    top: 20vh;
+    border-radius: 20px;
+}
+
+.quiz-mode{
+    position: absolute;
+    width: 100%;
+    background-color: var(--primary-color); //nicht fertig
+    display: flex;
+    gap: 40px;
+    height: 60px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.quiz-mode-btn{
+    margin-left: 30px;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+            .quiz-mode-btn:hover{
+                color: rgb(195, 193, 193);
+            }
+
+.quiz-mode .fa-right-from-bracket{
+    font-size: 23px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+            .quiz-mode .fa-right-from-bracket:hover{
+              color: red;
+              transition: 200ms ease;
+            }
+
+.content-create-new-quiz{
+    left: 50%;
+    transform: translate(-50%);
+    top: 100px;
+    position: absolute;
+}
+
+.enter-quiz-name{
+    background-color: transparent;
+    outline: none;
+    border: 1px solid white;
+    height: 20px;
+    width: 200px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    caret-color: white;
+    color: white;
+    font-size: 18px;
+}
+            .enter-quiz-name::placeholder{
+                color: rgb(184, 184, 184);
+                font-size: 15px;
+            }
+
+            .info-length{
+                font-size: 13px;
+                left: 50%;
+                position: absolute;
+                transform: translate(-50%);
+                margin-top: 5px;
+            }
+
+.create-quiz-btn{
+    background-color: var(--accent-color-blue);
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+    top: 200px;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+            .create-quiz-btn:hover{
+                background-color: var(--accent-color-blue-hover);
+            }
+
+
+.alert-create-quiz{
+    position: absolute;
+    background-color: var(--primary-color-opp);
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    height: 15em;
+    width: 30em;
+    border-radius: 50px;
+    z-index: 100;
+    display: block;
+    white-space: nowrap;
+    border: 2px solid var(--primary-color);
+    display: none;
+}
+
+.alert-text-create-quiz{
+    font-size: 17px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+    top: 150px;
 }

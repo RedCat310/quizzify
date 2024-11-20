@@ -351,6 +351,7 @@
   left: 50%;
   transform: translate(-50%);
   white-space: nowrap;
+  color: black;
 }
 
 .signIn-dropdown{
@@ -359,12 +360,13 @@
   left: 50%;
   transform: translate(-50%);
   background-color: transparent;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid rgb(0, 0, 0);
+  color: black;
   border-radius: 20px;
   padding: 10px 20px;
   text-decoration: none;
+  cursor: pointer;
 }
       .signIn-dropdown:hover{
-        background-color: rgba(255, 255, 255, 0.281);
+        background-color: rgba(255, 0, 0, 0.456);
       }

@@ -26,10 +26,10 @@ function AppBar(props) {
             <div className="dropdown">
                 <img src={user} alt="" className="user"></img>
                 <div className="dropdown-content">
-                <img src={user2} alt="" className="user-dropdown"></img>
+                <img src={user} alt="" className="user-dropdown"></img>
                     <div className='initials-dropdown'>
-                        <div className='user-name'><em>{userData ? userData.displayName : ""}</em></div><br />
-                        <div className='user-email'><em>{userData ? userData.email : ""}</em></div>
+                        <div className='user-name'>{userData ? userData.displayName : ""}</div><br />
+                        <div className='user-email'>{userData ? userData.email : ""}</div>
                     </div>
                     <Link className='settings-dropdown'>Konto-Einstellungen</Link>
                     <button onClick={() => signOut(auth)} className='signOut-dropdown'>Ausloggen</button>

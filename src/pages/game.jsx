@@ -32,18 +32,20 @@ function Game(){
     })
 
     const startQuiz = async () => {
-        setPage(true)
-        setCurentQuestion(0)
-        let id = crypto.randomUUID()
-        setUserID(id)
-        setDoc(doc(db, params.id, id), {
-            name: username,
-            doneQ: 0
-        })
-        setTimer({
-            
-            time: game.questions[0].time
-        })
+        if(username !== "" && game.status === "quiz"){
+            setPage(true)
+            setCurentQuestion(0)
+            let id = crypto.randomUUID()
+            setUserID(id)
+            setDoc(doc(db, params.id, id), {
+                name: username,
+                doneQ: 0
+            })
+            setTimer({
+                
+                time: game.questions[0].time
+            })
+        }else alert("Du hast keinen Benutzername eingegeben oder das quiz ist schon vorbei.")
     }
     const setAns = (ans) => {
         let newData = player.answers
@@ -65,14 +67,39 @@ function Game(){
         }
         else setDone(true)
     }
-        
+    const renderAnswer = () => {
+        if(game.status === "done"){
+            let data = game.questions
+            let correct = 0
+            for (let i = 0; i < data.length; i++) {
+                data[i].ans = player.answers[i]
+                if(player.answers[i] === true){
+                    correct++
+                } 
+            }
+            return ( <div>
+                <h1>Auswertung</h1>
+                <h3>Du solltest dein Platzireung bei deinem/r Moderator:in finden</h3>
+                <h2>{ correct }/{ data.length } Punkte</h2>                    
+                { data.map((ques) => (
+                    <div key={ques.question}>
+                        <h3>Frage: { ques.question }</h3>
+                        <h4>Du hast { ques.ans ? "richtig" : "falsch" } geantwortet</h4>
+                        { ques.answers.map((ans, index) => (
+                            <p key={ans.value} style={ ans.type ? { color: 'green' } : { color: 'red' } }> { ans.value }</p>
+                        )) }
+                    </div>
+                )) }
+            </div> )
+        }else return (<div className="finish-quiz">
+            <div className="text-finish"> Quiz abgeschlossen! Warte auf dein Ergebnis...</div>
+            <div className="loader"></div>
+        </div>)
+    } 
     return(
         <div>
             {page ? <div>
-                { done ? <div className="finish-quiz">
-                    <div className="text-finish"> Quiz abgeschlossen! Warte auf dein Ergebnis...</div>
-                    <div className="loader"></div>
-                </div> : <div>
+                { done ? renderAnswer() : <div>
                     <p className="question">{ game?.questions[curentQuestion].question }</p>
                     <div className="awnser-container-parent">
                         <div className="awnser-container">

@@ -69,14 +69,17 @@ function Game(){
     return(
         <div>
             {page ? <div>
-                { done ? <div>
-                    fertig!
+                { done ? <div className="finish-quiz">
+                    <div className="text-finish"> Quiz abgeschlossen! Warte auf dein Ergebnis...</div>
+                    <div className="loader"></div>
                 </div> : <div>
                     <p className="question">{ game?.questions[curentQuestion].question }</p>
-                    <div className="awnser-container">
-                    { game?.questions[curentQuestion].answers.map((ans, index) => (
-                        <button key={index} onClick={() => setAns(ans.type)} className="question-awnser">{ ans.value }</button>
-                    )) }
+                    <div className="awnser-container-parent">
+                        <div className="awnser-container">
+                        { game?.questions[curentQuestion].answers.map((ans, index) => (
+                            <button key={index} onClick={() => setAns(ans.type)} className="question-awnser">{ ans.value }</button>
+                        )) }
+                        </div>
                     </div>
                     <div className="bubbles">
                         <div className="bubble"></div>
